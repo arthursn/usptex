@@ -1,10 +1,14 @@
-Copy `texmf` folder contents to `/usr/share/texmf/`
+# Instalação
+
+## Distribuições Linux
+
+Copie o conteúdo da pasta `texmf` para `/usr/share/texmf/`:
 
 ```
 sudo cp -r texmf /usr/share/
 ```
 
-Then run `texhash` to refresh the TeX database
+Rode `texhash` para atualizar o banco de dados TeX:
 
 ```
 sudo texhash
