@@ -89,6 +89,7 @@
 \newcommand{\keyword}[1]{\adicionaElemento{palavraChaveLE}{#1}}
 \newcommand{\palavrachavele}[1]{\adicionaElemento{palavraChaveLE}{#1}}
 
+% \hyphenpenalty=10000 definido para evitar quebra de linha
 \newcommand{\USPcomentariodata}{%
 \hyphenpenalty=10000%
 \setextosiguais{\USPpublicacaotipo}{graduacao}{Trabalho de formatura apresentado \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de Engenheiro}{}%
@@ -97,6 +98,7 @@
 }
 
 \newcommand{\USPcomentariodataSF}{%
+\hyphenpenalty=10000%
 \setextosiguais{\USPpublicacaotipo}{tese}{Tese apresentada a Banca Examinadora do Programa de P\'os-Gradua\c{c}\~ao em Direito, da \USPlistaunidades{FDUSP} da \USPinstituicaodata{}, como exig\^encia parcial para obten\c{c}\~ao do t\'itulo de Doutor em Direito, na \'area de concentra\c{c}\~ao \USPareadeconcentracaodata{}, sob a orienta\c{c}\~ao d\USPartigoaltorientador{} Prof\USPartigoorientador{}. \USPorientadordata}{}%
 \setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao apresentada a Banca Examinadora do Programa de P\'os-Gradua\c{c}\~ao em Direito, da \USPlistaunidades{FDUSP} da \USPinstituicaodata{}, como exig\^encia parcial para obten\c{c}\~ao do t\'itulo de Mestre em Direito, na \'area de concentra\c{c}\~ao \USPareadeconcentracaodata{}, sob a orienta\c{c}\~ao d\USPartigoaltorientador{} Prof\USPartigoorientador{}. \USPorientadordata}{}%
 }
@@ -288,7 +290,7 @@
 		\begin{minipage}{.5\textwidth}%
 			\vspace{2.5cm}%
 			\estiloNaturezaarea{\USPcomentariodata\par%
-			  \vspace{1.5cm}\USPtituloareadeconcentracao\par\USPareadeconcentracaodata\par%
+			  \vspace{1cm}\USPtituloareadeconcentracao\par\USPareadeconcentracaodata\par%
 			  \vspace{1cm}\USPtituloorientador\par\USPorientadordata\par%
 			  \sevazio{\USPcoorientadordata}{}{\vspace{1cm}\USPtitulocoorientador\par\USPcoorientadordata\par}}%
 		\end{minipage}\par%
