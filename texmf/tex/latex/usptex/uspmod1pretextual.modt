@@ -1,0 +1,532 @@
+%% uspelempt.sty
+%% Copyright 2012 C. C. Fattori
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is C. C. Fattori.
+%
+% This work consists of the files usp.cls, uspmod1.mod, uspmod1bibliografia.modb, uspmod1ferramentas.modf, uspmod1flutuantes.modl, uspmod1pretextual.modt, uspdbdepartamentos.data, uspdbprogramas.data, usp.bst, usp-num.bst, usptex.inc, usptex.layout, usptexM.layout
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{uspmod1trabalho.modt}
+
+\criaPonteiro{uspauthor}
+\renewcommand{\author}[1]{\comautorestrue\adicionaElemento{uspauthor}{#1}}
+\newcommand{\autor}{\author}
+\newcommand{\autora}{\author}
+\def\USPautordata{\mostraTodosSeparados[\MakeUppercase]{uspauthor}{\\}}
+
+\newcommand{\USPcidadedata}{\USPcidadeFCdata}
+\newcommand{\USPunidadedata}{\USPunidadeFCdata}
+\newcommand{\USPareadeconcentracaodata}{}
+
+\criaPonteiro{uspfichaautorexpandido}
+\criaPonteiro{uspfichaautorresumido}
+\newcommand{\FCautorexpandido}[1]{\comautoresFCtrue\adicionaElemento{uspfichaautorexpandido}{#1}}
+\newcommand{\FCautoraexpandido}[1]{\comautoresFCtrue\adicionaElemento{uspfichaautorexpandido}{#1}}
+\newcommand{\FCautorresumido}[1]{\adicionaElemento{uspfichaautorresumido}{#1}}
+\newcommand{\FCautoraresumido}[1]{\adicionaElemento{uspfichaautorresumido}{#1}}
+\def\USPautorFCEdata{\mostraTodosSeparados{uspfichaautorexpandido}{;}}
+\def\USPautorFCRdata{\mostraTodosSeparados{uspfichaautorresumido}{;}}
+
+\def\USPartigoorientador{}
+\def\USPartigoaltorientador{o}
+\newcommand{\orientador}[1]{\renewcommand{\USPorientadordata}{#1}}
+\newcommand{\orientadora}[1]{\renewcommand{\USPorientadordata}{#1}\def\USPartigoorientador{a}\def\USPartigoaltorientador{a}\def\USPtituloorientador{Orientadora:}}
+
+\def\USPartigocoorientador{}
+\def\USPartigoaltcoorientador{o}
+\newcommand{\coorientador}[1]{\renewcommand{\USPcoorientadordata}{#1}}
+\newcommand{\coorientadora}[1]{\renewcommand{\USPcoorientadordata}{#1}\def\USPartigocoorientador{a}\def\USPartigoaltcoorientador{a}\def\USPtitulocoorientador{Co-orientadora:}}
+
+\newcommand{\titulo}[1]{\let\\\par\renewcommand{\USPtitulodata}{#1}}
+
+\newcommand{\ano}[1]{\renewcommand{\USPanodata}{#1}}
+
+\newcommand{\volume}[1]{\renewcommand{\USPvolumedata}{#1}}
+
+\newcommand{\cidade}[1]{\renewcommand{\USPcidadedata}{#1}}
+
+\newcommand{\unidade}[1]{\renewcommand{\USPunidadedata}{#1}}
+
+\newcommand{\USPdedicatoriadata}{}
+\newcommand{\dedicatoria}[1]{\let\\\par\renewcommand{\USPdedicatoriadata}{#1}}
+
+\newcommand{\USPagradecimentosdata}{}
+\newcommand{\agradecimentos}[1]{\let\\\par\renewcommand{\USPagradecimentosdata}{#1}}
+
+\newcommand{\USPresumodata}{}
+\newcommand{\resumo}[1]{\let\\\par\renewcommand{\USPresumodata}{#1}}
+
+\newcommand{\USPtituloresumole}{Abstract}
+\newcommand{\tituloResumole}[1]{\renewcommand{\USPtituloresumole}{#1}}
+
+\newcommand{\USPresumolepc}{Keywords:}
+\newcommand{\PCResumole}[1]{\renewcommand{\USPresumolepc}{#1}}
+
+\newcommand{\USPresumoledata}{}
+\newcommand{\resumole}[1]{\let\\\par\renewcommand{\USPresumoledata}{#1}}
+\newcommand{\abstract}[1]{\let\\\par\renewcommand{\USPresumoledata}{#1}}
+
+\newcounter{contassuntoFCaux}
+\newcounter{contassuntoFC}
+\newcommand{\assunto}[1]{\adicionaElemento{assuntoFC}{#1}}
+
+\newcommand{\USPpcFicha}{\mostraTodosNumerado{assuntoFC}}
+\newcommand{\USPpcResumo}{\mostraTodosSeparados{palavraChave}{.}}
+\newcommand{\USPpcResumole}{\mostraTodosSeparados{palavraChaveLE}{.}}
+
+\criaPonteiro{palavraChave}
+\newcommand{\palavrachave}[1]{\adicionaElemento{palavraChave}{#1}}
+\criaPonteiro{palavraChaveLE}
+\newcommand{\keyword}[1]{\adicionaElemento{palavraChaveLE}{#1}}
+\newcommand{\palavrachavele}[1]{\adicionaElemento{palavraChaveLE}{#1}}
+
+\newcommand{\USPcomentariodata}{%
+\hyphenpenalty=10000%
+\setextosiguais{\USPpublicacaotipo}{graduacao}{Trabalho de formatura apresentado \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de Engenheiro}{}%
+\setextosiguais{\USPpublicacaotipo}{tese}{Tese apresentada \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de doutor em Ci\^encias}{}%
+\setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao apresentada \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de mestre em Ci\^encias}{}%
+}
+
+\newcommand{\USPcomentariodataSF}{%
+\setextosiguais{\USPpublicacaotipo}{tese}{Tese apresentada a Banca Examinadora do Programa de P\'os-Gradua\c{c}\~ao em Direito, da \USPlistaunidades{FDUSP} da \USPinstituicaodata{}, como exig\^encia parcial para obten\c{c}\~ao do t\'itulo de Doutor em Direito, na \'area de concentra\c{c}\~ao \USPareadeconcentracaodata{}, sob a orienta\c{c}\~ao d\USPartigoaltorientador{} Prof\USPartigoorientador{}. \USPorientadordata}{}%
+\setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao apresentada a Banca Examinadora do Programa de P\'os-Gradua\c{c}\~ao em Direito, da \USPlistaunidades{FDUSP} da \USPinstituicaodata{}, como exig\^encia parcial para obten\c{c}\~ao do t\'itulo de Mestre em Direito, na \'area de concentra\c{c}\~ao \USPareadeconcentracaodata{}, sob a orienta\c{c}\~ao d\USPartigoaltorientador{} Prof\USPartigoorientador{}. \USPorientadordata}{}%
+}
+
+\newcommand{\comentario}[1]{\renewcommand{\USPcomentariodata}{#1}}
+
+\newif\ifUSPedicaorevisada\USPedicaorevisadafalse
+\newcommand{\edicaorevisada}{\USPedicaorevisadatrue}
+
+\input{uspdbprogramas.data}
+\input{uspdbdepartamentos.data}
+
+\newcommand{\USPdepartamentodata}{}
+\newcommand{\USPespecialidadedata}{}
+\newcommand{\USPunidadeFCdata}{}
+\newcommand{\USPcidadeFCdata}{}
+
+
+\newcommand{\USPepigrafeautor}{}
+\newcommand{\USPepigrafetexto}{}
+\newcommand{\epigrafe}[2]{{\let\\\par}\renewcommand{\USPepigrafetexto}{#1}\renewcommand{\USPepigrafeautor}{#2}\epigrafetrue}
+
+\newcommand{\USPtitulosumariodata}{Sum\'ario}
+\newcommand{\USPtitulolistadesiglasdata}{Lista de abreviaturas e siglas}
+\newcommand{\USPtitulolistadesimbolosdata}{Lista de s\'imbolos}
+\newcommand{\USPtitulofichacatalografica}{Cataloga\c{c}\~ao-na-publica\c{c}\~ao}
+\newcommand{\USPtitulodedicatoria}{Dedicat\'oria}
+\newcommand{\USPtituloagradecimentos}{Agradecimentos}
+\newcommand{\USPtitulolistadefigurasdata}{Lista de ilustra\c{c}\~oes}
+\newcommand{\USPtitulolistadetabelasdata}{Lista de tabelas}
+\newcommand{\USPtitulolistadelistagensdata}{Lista de listagens}
+
+%%% Definicoes de verificadores da existencia de cada pagina pre-textual
+\newif\ifEPTcapa\EPTcapafalse
+\newif\ifcomautores\comautoresfalse
+\newif\ifcomautoresFC\comautoresFCfalse
+\newif\ifEPTfalsafolhaderosto\EPTfalsafolhaderostofalse
+\newif\ifEPTfolhaderosto\EPTfolhaderostofalse
+\newif\ifEPTfichacatalografica\EPTfichacatalograficafalse
+\newif\ifEPTdedicatoria\EPTdedicatoriafalse
+\newif\ifEPTagradecimentos\EPTagradecimentosfalse
+\newif\ifepigrafe\epigrafefalse
+\newif\ifEPTresumo\EPTresumofalse
+\newif\ifEPTresumole\EPTresumolefalse
+\newif\ifEPTlistadefiguras\EPTlistadefigurasfalse
+\newif\ifEPTlistadetabelas\EPTlistadetabelasfalse
+\newif\ifEPTlistadelistagens\EPTlistadelistagensfalse
+\newif\ifEPTlistadesiglas\EPTlistadesiglasfalse
+\newif\ifEPTlistadesimbolos\EPTlistadesimbolosfalse
+\newif\ifEPTsumario\EPTsumariofalse
+\newif\ifPrimeiraDivisao\PrimeiraDivisaotrue
+\newif\ifPrimeiraSigla\PrimeiraSiglatrue
+\newif\ifPrimeiroSimbolo\PrimeiroSimbolotrue
+\newif\ifPrimeiraFigura\PrimeiraFiguratrue
+\newif\ifPrimeiraTabela\PrimeiraTabelatrue
+\newif\ifPrimeiraListagem\PrimeiraListagemtrue
+\newif\ifgravaSigla\gravaSiglatrue
+
+%%% Definicoes de testes para os verificadores de cada pagina pre-textual
+
+\def\testeEPTcapa{%
+	\EPTcapatrue%
+	\ifcomautores\else\EPTcapafalse\fi%
+	\sevazio{\USPtitulodata}{\EPTcapafalse}{}%
+	\sevazio{\USPcidadedata}{\EPTcapafalse}{}%
+	\sevazio{\USPanodata}{\EPTcapafalse}{}%
+}
+
+\def\testeEPTfalsafolhaderosto{%
+	\EPTfalsafolhaderostotrue%
+	\ifcomautores\else\EPTfalsafolhaderostofalse\fi%
+	\sevazio{\USPtitulodata}{\EPTfalsafolhaderostofalse}{}%
+	\sevazio{\USPcidadedata}{\EPTfalsafolhaderostofalse}{}%
+	\sevazio{\USPanodata}{\EPTfalsafolhaderostofalse}{}%
+	\sevazio{\USPcomentariodata}{\EPTfalsafolhaderostofalse}{}%
+}
+
+\def\testeEPTfolhaderosto{%
+	\EPTfolhaderostotrue%
+	\ifcomautores\else\EPTfolhaderostofalse\fi%
+	\sevazio{\USPtitulodata}{\EPTfolhaderostofalse}{}%
+	\sevazio{\USPcidadedata}{\EPTfolhaderostofalse}{}%
+	\sevazio{\USPanodata}{\EPTfolhaderostofalse}{}%
+	\sevazio{\USPcomentariodata}{\EPTfolhaderostofalse}{}%
+	\sevazio{\USPareadeconcentracaodata}{\EPTfolhaderostofalse}{}%
+	\sevazio{\USPorientadordata}{\EPTfolhaderostofalse}{}%
+}
+
+\def\testeEPTfichacatalografica{%
+	\EPTfichacatalograficatrue%
+	\ifcomautoresFC\else\EPTfichacatalograficafalse\fi
+	\sevazio{\USPtitulodata}{\EPTfichacatalograficafalse}{}%
+	\sevazio{\USPcidadeFCdata}{\EPTfichacatalograficafalse}{}%
+	\sevazio{\USPanoFCdata}{\EPTfichacatalograficafalse}{}%
+	\sevazio{\USPunidadeFCdata}{\EPTfichacatalograficafalse}{}%
+	\sevazio{\USPpublicacaotipo}{\EPTfichacatalograficafalse}{}%
+	\sevazio{\USPdepartamentodata}{\EPTfichacatalograficafalse}{}%
+	\ifnum\value{contpalavraChave}=0 \EPTfichacatalograficafalse\fi%
+}
+
+\def\testeEPTdedicatoria{%
+	\EPTdedicatoriatrue%
+	\sevazio{\USPdedicatoriadata}{\EPTdedicatoriafalse}{}%
+}
+
+\def\testeEPTagradecimentos{%
+	\EPTagradecimentostrue%
+	\sevazio{\USPagradecimentosdata}{\EPTagradecimentosfalse}{}%
+}
+
+\def\testeEPTresumo{%
+	\EPTresumotrue%
+	\sevazio{\USPresumodata}{\EPTresumofalse}{}%
+}
+
+\def\testeEPTresumole{%
+	\EPTresumoletrue%
+	\sevazio{\USPresumoledata}{\EPTresumolefalse}{}%
+}
+
+%%% Monta as paginas pre-textuais
+
+\def\capa{%
+	\begin{paginaPTnaonumerada}%
+		\estiloAutor{\USPautordata}\par%
+		\vfill%
+		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
+		\vfill%
+		\estiloLocaldata{\sevazio{\USPvolumedata}{}{v. \USPvolumedata \vspace{.8cm}}\par%
+		\USPcidadedata\par\USPanodata}}%
+	\end{paginaPTnaonumerada}%
+}
+
+\def\USPnaturezadata{%
+\setextosiguais{\USPpublicacaotipo}{tese}{Tese de Doutorado}{}%
+\setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao de Mestrado}{}%
+}
+
+\def\capaSF{%
+	\begin{paginaPTnaonumerada}%
+		\estiloAutor{\USPautordata}\par%
+		\vfill%
+		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
+		\null\par%
+		\hspace{.45\textwidth}
+		\estiloNaturezaarea{\USPnaturezadata\par}%
+		\hspace{.45\textwidth}
+		\estiloNaturezaarea{\USPtituloorientador\space\USPorientadordata\par}%
+		\vfill%
+		\estilounidadecapa{\USPinstituicaodata}\par%
+		\estilounidadecapa{Faculdade de Direito}\par%
+		\estiloLocaldataSF{\USPcidadedata}\par
+		\estiloLocaldataSF{\USPanodata}}%
+	\end{paginaPTnaonumerada}%
+}
+
+\def\falsafolhaderosto{%
+	\begin{paginaPTnumerada}%
+		\estiloAutor{\USPautordata}\par%
+		\vfill%
+		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
+		\hspace{.45\textwidth}%
+		\begin{minipage}{.5\textwidth}%
+			\vspace{2.5cm}%
+			\estiloNaturezaarea{\USPcomentariodata\par}%
+		\end{minipage}\par%
+		\vfill%
+		\estiloLocaldata{\sevazio{\USPvolumedata}{}{v. \USPvolumedata \vspace{.8cm}}\par%
+		\USPcidadedata\par\USPanodata}}%
+	\end{paginaPTnumerada}%
+}
+
+\def\USPtituloareadeconcentracao{\'Area de concentra\c{c}\~ao:}
+\def\USPtituloorientador{Orientador:}
+\def\USPtitulocoorientador{Co-orientador:}
+\def\USPtitulotrabalho{%
+\setextosiguais{\USPpublicacaotipo}{graduacao}{Trabalho de formatura}{}%
+\setextosiguais{\USPpublicacaotipo}{tese}{Tese (Doutorado)}{}%
+\setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao (Mestrado)}{}%
+}
+
+
+\def\folhaderosto{%
+	\begin{paginaPTnumerada}%
+		\estiloAutor{\USPautordata}\par%
+		\vfill%
+		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
+		\hspace{.45\textwidth}%
+		\begin{minipage}{.5\textwidth}%
+			\vspace{2.5cm}%
+			\estiloNaturezaarea{\USPcomentariodata\par%
+			  \vspace{1.5cm}\USPtituloareadeconcentracao\par\USPareadeconcentracaodata\par%
+			  \vspace{1cm}\USPtituloorientador\par\USPorientadordata\par%
+			  \sevazio{\USPcoorientadordata}{}{\vspace{1cm}\USPtitulocoorientador\par\USPcoorientadordata\par}}%
+		\end{minipage}\par%
+		\vfill%
+		\estiloLocaldata{\sevazio{\USPvolumedata}{}{v. \USPvolumedata \vspace{.8cm}}\par%
+		\USPcidadedata\par%
+		\USPanodata}}%
+	\end{paginaPTnumerada}%
+}
+
+\def\folhaderostoSF{%
+	\begin{paginaPTnumerada}%
+		\estiloAutor{\USPautordata}\par%
+		\vfill%
+		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
+		\hspace{.25\textwidth}%
+		\begin{minipage}{.7\textwidth}%
+			\vspace{2.5cm}%
+			\estiloNaturezaarea{\USPcomentariodataSF\par%
+			  \vspace{1.5cm}\USPtituloareadeconcentracao\par\USPareadeconcentracaodata\par%
+			  \vspace{1cm}\USPtituloorientador\par\USPorientadordata\par%
+			  \sevazio{\USPcoorientadordata}{}{\vspace{1cm}\USPtitulocoorientador\par\USPcoorientadordata\par}}%
+		\end{minipage}\par%
+		\vfill%
+		\estiloLocaldata{\sevazio{\USPvolumedata}{}{v. \USPvolumedata \vspace{.8cm}}\par%
+		\USPcidadedata\par%
+		\USPanodata}}%
+	\end{paginaPTnumerada}%
+}
+
+\def\USPformularioFCedicaorevisada{%
+	Este exemplar foi revisado e alterado em rela\c{c}\~ao \`a vers\~ao original, sob responsabilidade \'unica do autor e com a anu\^encia de seu orientador.\par\vspace{.3cm}%
+	\USPcidadedata, \ldots\ldots de \ldots\ldots\ldots\ldots\ldots\ldots de \USPanodata\par\vspace{.3cm}%
+	Assinatura do autor\par\vspace{.3cm}%
+	Assinatura do orientador%
+}
+
+\def\ultimaPagina{}
+
+\def\defineultimaPagina#1{\def\ultimaPagina{#1}}
+
+\def\USPfichaPadrao{%
+	\estiloFichacatalograficaConteudo{\USPautorFCEdata\par%
+	\hspace{.5cm}\USPtitulodata{} / \USPautorFCRdata{} -{}-\ifUSPedicaorevisada{ed.corr.-{}-}\fi \USPcidadeFCdata, \USPanoFCdata.\par%
+	\hspace{.5cm}\ultimaPagina{} p.\par\null\par%
+	\hspace{.5cm}\USPtitulotrabalho{} - \USPunidadeFCdata{} da \USPinstituicaodata. \USPdepartamentodata{}.\par\null\par%
+	\hspace{.5cm}\USPpcFicha{} I. \USPinstituicaodata{}. \USPunidadeFCdata{}. \USPdepartamentodata{} II. t.\par}%
+}
+
+\def\fichacatalografica{%
+	\begin{paginaPTnumerada}%
+	\null\vfill\par%
+	\ifUSPedicaorevisada{\begin{center}\fbox{\hspace{1.2cm}\parbox{11cm}{%
+			\vspace{.3cm}\USPformularioFCedicaorevisada\par%
+			\vspace{.5cm}%
+			}\hspace{.5cm}}%
+			\end{center}\par\vspace{2cm}}\fi
+	\begin{center}%
+		\estiloFichacatalograficaTitulo{\USPtitulofichacatalografica}\par%
+		\vspace{1.5cm}%
+		\fbox{\hspace{1.2cm}\parbox{11cm}{%
+			\vspace{.3cm}
+			\USPfichaPadrao\par%
+			\vspace{.5cm}%
+		}\hspace{.5cm}}%
+		\end{center}%
+	\end{paginaPTnumerada}%
+}
+
+\def\paginadedicatoria{%
+	\begin{paginaPTnumerada}%
+		\estiloDedicatoriaTitulo{\USPtitulodedicatoria}%
+		\vspace{1cm}%
+		\formatoDireita{%
+		  \begin{minipage}{.5\textwidth}%
+			\estiloDedicatoriaTexto{\USPdedicatoriadata}%
+		  \end{minipage}%
+		}%
+	\end{paginaPTnumerada}%
+}
+
+\def\paginaagradecimentos{%
+	\begin{paginaPTnumerada}%
+		\estiloAgradecimentosTitulo{\USPtituloagradecimentos}%
+		\vspace{1cm}%
+		\estiloAgradecimentosTexto{\USPagradecimentosdata}%
+	\end{paginaPTnumerada}%
+}
+
+\def\paginaPTepigrafe{%
+	\begin{paginaPTnumerada}%
+		\null\vfill%
+		\formatoDireita{%
+		  \begin{minipage}{.5\textwidth}%
+			\estiloEpigrafeTexto{\USPepigrafetexto}\par%
+			\estiloEpigrafeAutor{\USPepigrafeautor}%
+		  \end{minipage}%
+		}%
+	\end{paginaPTnumerada}%
+	\epigrafefalse%
+}
+
+\def\USPtituloresumo{Resumo}
+\def\USPtitulopalavraschave{Palavras-chave:}
+
+\def\paginaresumo{%
+	\begin{paginaPTnumerada}%
+		\estiloResumoTitulo{\USPtituloresumo}\par%
+		\vspace{1cm}%
+		\estiloResumoTexto{%
+		  \USPresumodata\par\vspace{.5cm}%
+		  \USPtitulopalavraschave{} \USPpcResumo.%
+		}%
+	\end{paginaPTnumerada}%
+}
+
+\def\paginaresumole{%
+	\begin{paginaPTnumerada}%
+		\estiloResumoleTitulo{\USPtituloresumole}\par%
+		\vspace{1cm}%
+		\estiloResumoleTexto{%
+		  \USPresumoledata\par\vspace{.5cm}%
+		  \USPresumolepc{} \USPpcResumole%
+		}%
+	\end{paginaPTnumerada}%
+}
+
+\def\listadefiguras{%
+	\begin{paginaPTnumerada}%
+		\let\numberline\USPnumberline
+		\estiloSumarioTitulo{\USPtitulolistadefigurasdata}%
+		\@starttoc{ldf}%
+		\let\numberline\USPnumberlineOLD
+	\end{paginaPTnumerada}%
+}%
+
+\newcommand\listoffigures{\listadefiguras}
+
+\def\listadetabelas{%
+	\begin{paginaPTnumerada}
+		\let\numberline\USPnumberline
+		\estiloSumarioTitulo{\USPtitulolistadetabelasdata}%
+		\@starttoc{ldt}%
+		\let\numberline\USPnumberlineOLD
+	\end{paginaPTnumerada}%
+}
+
+\newcommand\listoftables{\listadetabelas}
+
+\def\listadelistagens{%
+	\begin{paginaPTnumerada}%
+		\let\numberline\USPnumberline
+		\estiloSumarioTitulo{\USPtitulolistadelistagensdata}%
+		\@starttoc{ldl}%
+		\let\numberline\USPnumberlineOLD
+	\end{paginaPTnumerada}%
+}
+
+\newlength\espacoSiglaLista
+\setlength\espacoSiglaLista{0cm}
+\newlength\espacoSiglaMargem
+\setlength\espacoSiglaMargem{.2cm}
+\newlength\espacoSiglaNome
+\setlength\espacoSiglaNome{.2cm}
+\newlength\espacoSiglaEntre
+\setlength\espacoSiglaEntre{.3cm}
+
+\newcommand\listadesiglas{%
+    \begin{paginaPTnumerada}
+		\estiloSumarioTitulo{\USPtitulolistadesiglasdata}%
+		\@starttoc{ldsg}%
+		\vspace{\espacoSiglaLista}
+		\setcounter{auxbuscaalfabetica}{0}%
+		\edef\@tempa{it}%
+		\loop\ifnum\value{auxbuscaalfabetica}<\value{contUSPSiglasMenor}%
+			\edef\@tempb{\pegaElementoIndice{USPSiglasPropriedade}{\the\value{auxbuscaalfabetica}}}%
+			\noindent\hspace{\espacoSiglaMargem}\begin{minipage}{.15\textwidth}\pegaElementoIndice{USPSiglasMenor}{\the\value{auxbuscaalfabetica}}\end{minipage} \noindent\hspace{\espacoSiglaNome}\begin{minipage}{.75\textwidth}\ifx\@tempa\@tempb\emph{\pegaElementoIndice{USPSiglasMaior}{\the\value{auxbuscaalfabetica}}}\else\pegaElementoIndice{USPSiglasMaior}{\the\value{auxbuscaalfabetica}}\fi\end{minipage}\par%
+			\vspace{\espacoSiglaEntre}%
+			\stepcounter{auxbuscaalfabetica}%
+		\repeat%
+	\end{paginaPTnumerada}
+}
+
+\newcommand\listadesimbolos{%
+    \begin{paginaPTnumerada}%
+		\estiloSumarioTitulo{\USPtitulolistadesimbolosdata}%
+		\@starttoc{ldsb}%
+	\end{paginaPTnumerada}%
+}
+
+\def\sumario{%
+	\begin{paginaPTnumerada}%
+		\estiloSumarioTitulo{\USPtitulosumariodata}%
+		\@starttoc{toc}%
+	\end{paginaPTnumerada}%
+}
+
+\newcommand\tableofcontents{\sumario}
+
+\newcommand{\elementospretextuais}{%
+\setextosiguais{\USPunidadeformato}{ep}{\elementospretextuaisPoli}{\elementospretextuaisSanfran}%
+}
+
+\newcommand{\elementospretextuaisPoli}{%
+	\let\USPnumberlineOLD\numberline
+	\testeEPTcapa\ifEPTcapa\capa\fi%
+	\testeEPTfalsafolhaderosto\ifEPTfalsafolhaderosto\falsafolhaderosto\fi%
+	\testeEPTfolhaderosto\ifEPTfolhaderosto\folhaderosto\fi%
+	\testeEPTfichacatalografica\ifEPTfichacatalografica\fichacatalografica\fi%
+	\testeEPTdedicatoria\ifEPTdedicatoria\paginadedicatoria\fi%
+	\testeEPTagradecimentos\ifEPTagradecimentos\paginaagradecimentos\fi%
+	\ifepigrafe\paginaPTepigrafe\fi%
+	\testeEPTresumo\ifEPTresumo\paginaresumo\fi%
+	\testeEPTresumole\ifEPTresumole\paginaresumole\fi%
+	\ifEPTlistadefiguras\listadefiguras\else\newwrite\tf@ldf\immediate\openout\tf@ldf \jobname.ldf\relax\fi%
+	\ifEPTlistadetabelas\listadetabelas\else\newwrite\tf@ldt\immediate\openout\tf@ldt \jobname.ldt\relax\fi%
+	\ifEPTlistadelistagens\listadelistagens\else\newwrite\tf@ldl\immediate\openout\tf@ldl \jobname.ldl\relax\fi%
+	\ifEPTlistadesiglas\listadesiglas\else\newwrite\tf@ldsg\immediate\openout\tf@ldsg \jobname.ldsg\relax\fi%
+	\ifEPTlistadesimbolos\listadesimbolos\else\newwrite\tf@ldsb\immediate\openout\tf@ldsb \jobname.ldsb\relax\fi%
+	\ifEPTsumario\sumario\else\newwrite\tf@toc\immediate\openout\tf@toc \jobname.toc\relax\fi%
+	\clearpage%
+}
+
+\newcommand{\elementospretextuaisSanfran}{%
+	\let\USPnumberlineOLD\numberline
+	\testeEPTcapa\ifEPTcapa\capaSF\fi%
+	\testeEPTfolhaderosto\ifEPTfolhaderosto\folhaderostoSF\fi%
+	\testeEPTfichacatalografica\ifEPTfichacatalografica\fichacatalografica\fi%
+	\testeEPTdedicatoria\ifEPTdedicatoria\paginadedicatoria\fi%
+	\testeEPTagradecimentos\ifEPTagradecimentos\paginaagradecimentos\fi%
+	\ifepigrafe\paginaPTepigrafe\fi%
+	\testeEPTresumo\ifEPTresumo\paginaresumo\fi%
+	\testeEPTresumole\ifEPTresumole\paginaresumole\fi%
+	\ifEPTlistadefiguras\listadefiguras\else\newwrite\tf@ldf\immediate\openout\tf@ldf \jobname.ldf\relax\fi%
+	\ifEPTlistadetabelas\listadetabelas\else\newwrite\tf@ldt\immediate\openout\tf@ldt \jobname.ldt\relax\fi%
+	\ifEPTlistadelistagens\listadelistagens\else\newwrite\tf@ldl\immediate\openout\tf@ldl \jobname.ldl\relax\fi%
+	\ifEPTlistadesiglas\listadesiglas\else\newwrite\tf@ldsg\immediate\openout\tf@ldsg \jobname.ldsg\relax\fi%
+	\ifEPTlistadesimbolos\listadesimbolos\else\newwrite\tf@ldsb\immediate\openout\tf@ldsb \jobname.ldsb\relax\fi%
+	\ifEPTsumario\sumario\else\newwrite\tf@toc\immediate\openout\tf@toc \jobname.toc\relax\fi%
+	\clearpage%
+}

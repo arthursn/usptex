@@ -1,0 +1,64 @@
+%% uspbiblio.sty
+%% Copyright 2012 C. C. Fattori
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is C. C. Fattori.
+%
+% This work consists of the files usp.cls, uspmod1.mod, uspmod1bibliografia.modb, uspmod1ferramentas.modf, uspmod1flutuantes.modl, uspmod1pretextual.modt, uspdbdepartamentos.data, uspdbprogramas.data, usp.bst, usp-num.bst, usptex.inc, usptex.layout, usptexM.layout
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{uspdbprogramas.data}
+
+\def\USPlistaunidades#1{%
+\setextosiguais{#1}{EPUSP}{Escola Polit\'ecnica}{%
+\setextosiguais{#1}{FDUSP}{Faculdade de Direito}{}}%
+}
+
+\def\USPlistacidades#1{%
+\setextosiguais{#1}{SP}{S\~ao Paulo}{}%
+}
+
+\newcommand{\programa}[1]{%
+\setextosiguais{#1}{2131}{\renewcommand{\USPareadeconcentracaodata}{Direito Civil}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2132}{\renewcommand{\USPareadeconcentracaodata}{Direito Comercial}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2133}{\renewcommand{\USPareadeconcentracaodata}{Direito Econ\^omico e Financeiro}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2134}{\renewcommand{\USPareadeconcentracaodata}{Direito do Estado}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2135}{\renewcommand{\USPareadeconcentracaodata}{Direito Internacional}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2136}{\renewcommand{\USPareadeconcentracaodata}{Direito Penal}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2137}{\renewcommand{\USPareadeconcentracaodata}{Direito Processual}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2138}{\renewcommand{\USPareadeconcentracaodata}{Direito do Trabalho e da Seguridade Social}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2139}{\renewcommand{\USPareadeconcentracaodata}{Filosofia e Teoria Geral do Direito}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2140}{\renewcommand{\USPareadeconcentracaodata}{Direitos Humanos}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{2131}{\renewcommand{\USPareadeconcentracaodata}{Direito Romano e Sistemas Jur\'idicos Contempor\^aneos}\renewcommand{\USPunidadedata}{\USPlistaunidades{FDUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3132}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Mec\^anica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3133}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Metal\'urgica e de Materiais}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3134}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Mineral}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3135}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Naval e Oce\^anica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3136}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Produ\c{c}\~ao}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3137}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Qu\'imica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3138}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Transportes}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3139}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Sistemas}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3140}{\renewcommand{\USPareadeconcentracaodata}{Microeletr\^onica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3141}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Computa\c{c}\~ao}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3142}{\renewcommand{\USPareadeconcentracaodata}{Sistemas Eletr\^onicos}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3143}{\renewcommand{\USPareadeconcentracaodata}{Sistemas de Pot\^encia}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3144}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Estruturas}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3145}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Geot\'ecnica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3146}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Constru\c{c}\~ao Civil e Urbana}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3147}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Hidr\'aulica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3148}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Sistemas Log\'isticos}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3149}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Automotiva}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3150}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Mec\^anica de Energia de Flu\'idos}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3151}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Mec\^anica de Projeto de Fabrica\c{c}\~ao}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3152}{\renewcommand{\USPareadeconcentracaodata}{Engenharia de Controle e Automa\c{c}\~ao Mec\^anica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3153}{\renewcommand{\USPareadeconcentracaodata}{Inova\c{c}\~ao na Constru\c{c}\~ao Civil}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+\setextosiguais{#1}{3154}{\renewcommand{\USPareadeconcentracaodata}{Engenharia Biom\'edica}\renewcommand{\USPunidadedata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadedata}{\USPlistacidades{SP}}}{}%
+}%

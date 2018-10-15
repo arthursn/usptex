@@ -1,0 +1,194 @@
+%% uspflut.sty
+%% Copyright 2012 C. C. Fattori
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is C. C. Fattori.
+%
+% This work consists of the files usp.cls, uspmod1.mod, uspmod1bibliografia.modb, uspmod1ferramentas.modf, uspmod1flutuantes.modl, uspmod1pretextual.modt, uspdbdepartamentos.data, uspdbprogramas.data, usp.bst, usp-num.bst, usptex.inc, usptex.layout, usptexM.layout
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{uspmod1flutuante.modl}
+
+\newlength\abovecaptionskip
+\setlength\abovecaptionskip{10\p@}
+\newlength\belowcaptionskip
+\setlength\belowcaptionskip{10\p@}
+
+%%%%%% Legendas
+
+\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\formatoDez #1 #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    \formatoDez #1 #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+
+  \vskip\belowcaptionskip
+}
+
+\newcommand\figure@makecaption[2]{\immediate\write\@mainaux{\global\string\EPTlistadefigurastrue}\original@makecaption{#1}{#2}}
+\newcommand\table@makecaption[2]{\immediate\write\@mainaux{\global\string\EPTlistadetabelastrue}\original@makecaption{#1}{#2}}
+\newcommand\listagem@makecaption[2]{\immediate\write\@mainaux{\global\string\EPTlistadelistagenstrue}\original@makecaption{#1}{#2}}
+
+\let\original@makecaption\@makecaption
+
+%%%%%% Fontes
+\def\fonte@original{eu}
+\def\textofonte@original{Elaborado pelo pr\'oprio autor}
+
+
+\def\fonte{\@ifnextchar[{\fonte@i}{\fonte@i[]}}
+\def\fonte@i[#1]{\@ifnextchar[{\fonte@ii{#1}}{\fonte@ii{#1}[]}}
+
+\def\fonte@ii#1[#2]#3{
+	\vskip 0pt
+	\formatoDez Fonte:\space\setextosiguais{\fonte@original}{#3}{\textofonte@original}{#1\citar{#3}#2}%
+	\vskip\belowcaptionskip
+}
+
+\def\USPnomeflutuante{}
+
+%%%%%% Ilustrações
+
+\newcounter{figure}
+\newcounter{desenho}
+\newcounter{esquema}
+\newcounter{fluxograma}
+\newcounter{fotografia}
+\newcounter{grafico}
+\newcounter{grafo}
+\newcounter{subgrafo}[grafo]
+\newcounter{subgrafo@save}
+\newcounter{mapa}
+\newcounter{organograma}
+\newcounter{planta}
+\newcounter{quadro}
+\newcounter{retrato}
+\def\fps@figure{!hbtb}
+\def\fps@desenho{!hbtb}
+\def\fps@esquema{!hbtb}
+\def\fps@fluxograma{!hbtb}
+\def\fps@fotografia{!hbtb}
+\def\fps@grafico{!hbtb}
+\def\fps@grafo{!hbtb}
+\def\fps@mapa{!hbtb}
+\def\fps@organograma{!hbtb}
+\def\fps@planta{!hbtb}
+\def\fps@quadro{!hbtb}
+\def\fps@retrato{!hbtb}
+\def\ftype@figure{1}
+\def\ftype@desenho{1}
+\def\ftype@esquema{1}
+\def\ftype@fluxograma{1}
+\def\ftype@fotografia{1}
+\def\ftype@grafico{1}
+\def\ftype@grafo{1}
+\def\ftype@mapa{1}
+\def\ftype@organograma{1}
+\def\ftype@planta{1}
+\def\ftype@quadro{1}
+\def\ftype@retrato{1}
+\def\ext@figure{ldf}
+\def\ext@desenho{ldf}
+\def\ext@esquema{ldf}
+\def\ext@fluxograma{ldf}
+\def\ext@fotografia{ldf}
+\def\ext@grafico{ldf}
+\def\ext@grafo{ldf}
+\def\ext@mapa{ldf}
+\def\ext@organograma{ldf}
+\def\ext@planta{ldf}
+\def\ext@quadro{ldf}
+\def\ext@retrato{ldf}
+\def\nome@figure{Figura}
+\def\nome@desenho{Desenho}
+\def\nome@esquema{Esquema}
+\def\nome@fluxograma{Fluxograma}
+\def\nome@fotografia{Fotografia}
+\def\nome@grafico{Gr\'afico}
+\def\nome@grafo{Grafo}
+\def\nome@mapa{Mapa}
+\def\nome@organograma{Organograma}
+\def\nome@planta{Planta}
+\def\nome@quadro{Quadro}
+\def\nome@retrato{Retrato}
+\def\fnum@figure{\nome@figure\space\@arabic\c@figure\space -}
+\def\fnum@desenho{\nome@desenho\space\@arabic\c@desenho\space -}
+\def\fnum@esquema{\nome@esquema\space\@arabic\c@esquema\space -}
+\def\fnum@fluxograma{\nome@fluxograma\space\@arabic\c@fluxograma\space -}
+\def\fnum@fotografia{\nome@fotografia\space\@arabic\c@fotografia\space -}
+\def\fnum@grafico{\nome@grafico\space\@arabic\c@grafico\space -}
+\def\fnum@grafo{\nome@grafo\space\@arabic\c@grafo\space -}
+\def\thesubgrafo{\@alph\c@subgrafo}
+\def\p@subgrafo{\@arabic\c@grafo.}
+\def\fnum@mapa{\nome@mapa\space\@arabic\c@mapa\space -}
+\def\fnum@organograma{\nome@organograma\space\@arabic\c@organograma\space -}
+\def\fnum@planta{\nome@planta\space\@arabic\c@planta\space -}
+\def\fnum@quadro{\nome@quadro\space\@arabic\c@quadro\space -}
+\def\fnum@retrato{\nome@retrato\space\@arabic\c@retrato\space -}
+\newenvironment{figura}{\let\@makecaption\figure@makecaption\centrafloats{figure}}{\saicentrafloats}
+\newenvironment{desenho}{\let\@makecaption\figure@makecaption\centrafloats{desenho}}{\saicentrafloats}
+\newenvironment{esquema}{\let\@makecaption\figure@makecaption\centrafloats{esquema}}{\saicentrafloats}
+\newenvironment{fluxograma}{\let\@makecaption\figure@makecaption\centrafloats{fluxograma}}{\saicentrafloats}
+\newenvironment{fotografia}{\let\@makecaption\figure@makecaption\centrafloats{fotografia}}{\saicentrafloats}
+\newenvironment{grafico}{\let\@makecaption\figure@makecaption\centrafloats{grafico}}{\saicentrafloats}
+\newenvironment{grafo}{\let\@makecaption\figure@makecaption\centrafloats{grafo}}{\saicentrafloats}
+\newenvironment{mapa}{\let\@makecaption\figure@makecaption\centrafloats{mapa}}{\saicentrafloats}
+\newenvironment{organograma}{\let\@makecaption\figure@makecaption\centrafloats{organograma}}{\saicentrafloats}
+\newenvironment{planta}{\let\@makecaption\figure@makecaption\centrafloats{planta}}{\saicentrafloats}
+\newenvironment{quadro}{\let\@makecaption\figure@makecaption\centrafloats{quadro}}{\saicentrafloats}
+\newenvironment{retrato}{\let\@makecaption\figure@makecaption\centrafloats{retrato}}{\saicentrafloats}
+\newenvironment{figure}{\let\@makecaption\figure@makecaption\centrafloats{figure}}{\saicentrafloats}
+\newenvironment{figura*}{\centradblfloats{figure}}{\saicentradblfloats}
+\newenvironment{figure*}{\centradblfloats{figure}}{\saicentradblfloats}
+\newcommand*\l@figure{\let\USPnomeflutuante\nome@figure\@dottedtocline{1}{1.5em}{7.1em}}
+%\newcommand*\l@subfigure{\let\USPnomeflutuante\nome@figure\@dottedtocline{1}{1.5em}{7.1em}}
+%\newcommand*\l@subgrafo{\let\USPnomeflutuante\nome@grafo\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@desenho{\let\USPnomeflutuante\nome@desenho\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@esquema{\let\USPnomeflutuante\nome@esquema\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@fluxograma{\let\USPnomeflutuante\nome@fluxograma\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@fotografia{\let\USPnomeflutuante\nome@fotografia\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@grafico{\let\USPnomeflutuante\nome@grafico\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@grafo{\let\USPnomeflutuante\nome@grafo\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@mapa{\let\USPnomeflutuante\nome@mapa\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@organograma{\let\USPnomeflutuante\nome@organograma\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@planta{\let\USPnomeflutuante\nome@planta\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@quadro{\let\USPnomeflutuante\nome@quadro\@dottedtocline{1}{1.5em}{7.1em}}
+\newcommand*\l@retrato{\let\USPnomeflutuante\nome@retrato\@dottedtocline{1}{1.5em}{7.1em}}
+
+%%%%%% Tabelas
+
+\newcounter{table}
+\def\fps@table{!hbtb}
+\def\ftype@table{2}
+\def\ext@table{ldt}
+\def\nome@table{Tabela}
+\def\fnum@table{\nome@table\space\@arabic\c@table\space -}
+\newenvironment{tabela}{\let\@makecaption\table@makecaption\centrafloats{table}}{\saicentrafloats}
+\newenvironment{table}{\let\@makecaption\table@makecaption\centrafloats{table}}{\saicentrafloats}
+\newenvironment{tabela*}{\centradblfloats{table}}{\end{center}\saicentradblfloats}
+\newenvironment{table*}{\centradblfloats{table}}{\end{center}\saicentradblfloats}
+\newcommand*\l@table{\let\USPnomeflutuante\nome@table\@dottedtocline{1}{1.5em}{7.1em}}
+
+%%%%%% Listagens
+
+\newcounter{listagem}
+\def\fps@listagem{!hbtb}
+\def\ftype@listagem{3}
+\def\ext@listagem{ldl}
+\def\nome@listagem{Listagem}
+\def\fnum@listagem{\nome@listagem\space\@arabic\c@listagem\space -}
+\newenvironment{listagem}{\let\@makecaption\listagem@makecaption\centrafloats{listagem}}{\saicentrafloats}
+\newenvironment{listagem*}{\centradblfloats{listagem}}{\saicentradblfloats}
+\newcommand*\l@listagem{\let\USPnomeflutuante\nome@listagem\@dottedtocline{1}{1.5em}{7.1em}}

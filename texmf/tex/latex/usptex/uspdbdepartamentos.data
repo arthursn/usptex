@@ -1,0 +1,36 @@
+%% uspbiblio.sty
+%% Copyright 2012 C. C. Fattori
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is C. C. Fattori.
+%
+% This work consists of the files usp.cls, uspmod1.mod, uspmod1bibliografia.modb, uspmod1ferramentas.modf, uspmod1flutuantes.modl, uspmod1pretextual.modt, uspdbdepartamentos.data, uspdbprogramas.data, usp.bst, usp-num.bst, usptex.inc, usptex.layout, usptexM.layout
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesFile{uspdbprogramas.data}
+
+\newcommand{\departamento}[1]{%
+\setextosiguais{#1}{ep-pcc}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Constru\c{c}\~ao Civil}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Constru\c{c}\~ao Civil}}{}
+\setextosiguais{#1}{ep-pcs}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Computa\c{c}\~ao e Sistemas Digitais}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Computa\c{c}\~ao e Sistemas Digitais}}{}
+\setextosiguais{#1}{ep-pea}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Energia e Automa\c{c}\~ao El\'etricas}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Energia e Automa\c{c}\~ao El\'etricas}}{}
+\setextosiguais{#1}{ep-pef}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Estruturas e Geot\'ecnica}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Estruturas e Geot\'ecnica}}{}
+\setextosiguais{#1}{ep-phd}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia Hidr\'aulica e Ambiental}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia Hidr\'aulica e Ambiental}}{}
+\setextosiguais{#1}{ep-pme}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia Mec\^anica}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia Mec\^anica}}{}
+\setextosiguais{#1}{ep-pmi}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Minas e Petr\'oleo}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Minas e Petr\'oleo}}{}
+\setextosiguais{#1}{ep-pmr}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia Mecatr\^onica e de Sistemas Mec\^anicos}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia Mecatr\^onica e de Sistemas Mec\^anicos}}{}
+\setextosiguais{#1}{ep-pmt}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Metal\'urgica e de Materiais}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Metal\'urgica e de Materiais}}{}
+\setextosiguais{#1}{ep-pnv}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia Naval e Oce\^anica}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia Naval e Oce\^anica}}{}
+\setextosiguais{#1}{ep-pqi}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia Qu\'imica}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia Qu\'imica}}{}
+\setextosiguais{#1}{ep-pro}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Produ\c{c}\~ao}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Produ\c{c}\~ao}}{}
+\setextosiguais{#1}{ep-psi}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Sistemas Eletr\^onicos}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Sistemas Eletr\^onicos}}{}
+\setextosiguais{#1}{ep-ptc}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Telecomunica\c{c}\~oes e Controle}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Telecomunica\c{c}\~oes e Controle}}{}
+\setextosiguais{#1}{ep-ptr}{\renewcommand{\USPdepartamentodata}{Departamento de Engenharia de Transportes}\renewcommand{\USPunidadeFCdata}{\USPlistaunidades{EPUSP}}\renewcommand{\USPcidadeFCdata}{\USPlistacidades{SP}}\renewcommand{\USPespecialidadedata}{Engenharia de Transportes}}{}
+}
