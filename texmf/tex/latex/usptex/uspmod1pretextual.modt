@@ -409,9 +409,9 @@
 
 \def\paginaresumole{%
 	\begin{paginaPTnumerada}%
-		\estiloResumoleTitulo{\USPtituloresumole}\par%
+		\estiloResumoTitulo{\USPtituloresumole}\par%
 		\vspace{1cm}%
-		\estiloResumoleTexto{%
+		\estiloResumoTexto{%
 		  \USPresumoledata\par\vspace{.5cm}%
 		  \USPresumolepc{} \USPpcResumole%
 		}%

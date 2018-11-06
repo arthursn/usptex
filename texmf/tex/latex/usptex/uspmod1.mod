@@ -47,9 +47,9 @@
 
 \newcommand{\fontetreze}{\@setfontsize\fontetreze{13}{16}}
 
+\newcommand{\formatoTreze}{\fontsize{13}{16}\selectfont}
 \newcommand{\formatoQuatorze}{\fontsize{14}{17}\selectfont}
 \newcommand{\formatoDezesseis}{\fontsize{16}{17}\selectfont}
-\newcommand{\formatoTreze}{\fontetreze}
 \newcommand{\formatoDez}{\fontsize{10}{12}\selectfont}
 \newcommand{\formatoCaixaalta}[1]{\MakeUppercase{#1}}
 \newcommand{\formatoVersal}[1]{{\scshape #1}}
@@ -64,32 +64,37 @@
 %%%%%%%%%%%%%%%Definição dos estilos das informações
 
 \newcommand{\estiloAutor}[1]{\formatoCentralizado{#1}}
-\newcommand{\estiloTitulo}[1]{\formatoCentralizado{\formatoNegrito{{\formatoDezesseis #1}}}}
+\newcommand{\estiloTitulo}[1]{\formatoCentralizado{\formatoNegrito{\formatoDezesseis{#1}}}}
 \newcommand{\estiloLocaldata}[1]{\formatoCentralizado{#1}}
 \newcommand{\estiloLocaldataSF}[1]{\formatoCentralizado{\formatoNegrito{#1}}}
 \newcommand{\estilounidadecapa}[1]{\formatoCentralizado{\formatoNegrito{\formatoCaixaalta{#1}}}}
 \newcommand{\estiloNaturezaarea}[1]{{\formatoSimples\normalsize #1}}
 \newcommand{\estiloFichacatalograficaTitulo}[1]{\formatoCentralizado{\formatoNegrito{#1}}}
 \newcommand{\estiloFichacatalograficaConteudo}[1]{{\begin{flushleft}\formatoSimples\normalsize #1\end{flushleft}}}
-\newcommand{\estiloDedicatoriaTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoQuatorze #1}}}}
+\newcommand{\estiloDedicatoriaTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{\formatoQuatorze{#1}}}}
 \newcommand{\estiloDedicatoriaTexto}[1]{\formatoDireita{#1}}
-\newcommand{\estiloAgradecimentosTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoQuatorze #1}}}}
+\newcommand{\estiloAgradecimentosTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{\formatoNegrito{\formatoQuatorze{#1}}}}}
 \newcommand{\estiloAgradecimentosTexto}[1]{#1}
 \newcommand{\estiloEpigrafeTexto}[1]{\formatoDireita{#1}}
 \newcommand{\estiloEpigrafeAutor}[1]{\formatoDireita{(#1)}}
-\newcommand{\estiloResumoTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoQuatorze #1}}}}
+\newcommand{\estiloResumoTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoNegrito{{\formatoQuatorze{ #1}}}}}}}
 \newcommand{\estiloResumoTexto}[1]{#1}
-\newcommand{\estiloResumoleTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoQuatorze #1}}}}
+\newcommand{\estiloResumoleTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoNegrito{{\formatoQuatorze{ #1}}}}}}}
 \newcommand{\estiloResumoleTexto}[1]{#1}
-\newcommand{\estiloListaTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoQuatorze #1}}}}
-\setextosiguais{\USPunidadeformato}{fd}{\newcommand{\estiloCapitulo}[1]{\formatoNegrito{{\formatoQuatorze #1}}}}{\newcommand{\estiloCapitulo}[1]{\formatoNegrito{ #1}}}
-\newcommand{\estiloSecao}[1]{#1}
+\newcommand{\estiloListaTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{\formatoQuatorze{#1}}}}
+\newcommand{\estiloCapitulo}[1]{\formatoNegrito{\formatoQuatorze{#1}}}%
+% \setextosiguais{\USPunidadeformato}{fd}{%
+% \newcommand{\estiloCapitulo}[1]{\formatoNegrito{\formatoQuatorze{#1}}}%
+% }{%
+% \newcommand{\estiloCapitulo}[1]{\formatoNegrito{#1}}%
+% }
+\newcommand{\estiloSecao}[1]{\formatoTreze{#1}}
 \newcommand{\estiloSubsecao}[1]{\formatoNegrito{#1}}
 \newcommand{\estiloSubsubsecao}[1]{\formatoItalico{#1}}
 \newcommand{\estiloParagrafo}[1]{#1}
 \newcommand{\estiloCitacaoMaior}[1]{{\formatoSimples\formatoDez #1}}
 
-\newcommand{\estiloSumarioTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoQuatorze #1}}}}
+\newcommand{\estiloSumarioTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{{\formatoNegrito{{\formatoQuatorze{ #1}}}}}}}
 
 %%%%%%%%%%%%%%%Epígrafe em página não pré-textual
 
