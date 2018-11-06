@@ -93,8 +93,8 @@
 \newcommand{\USPcomentariodata}{%
 \hyphenpenalty=10000%
 \setextosiguais{\USPpublicacaotipo}{graduacao}{Trabalho de formatura apresentado \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de Engenheiro}{}%
-\setextosiguais{\USPpublicacaotipo}{tese}{Tese apresentada \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de doutor em Ci\^encias}{}%
-\setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao apresentada \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de mestre em Ci\^encias}{}%
+\setextosiguais{\USPpublicacaotipo}{tese}{Tese apresentada \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de Doutor em Ci\^encias}{}%
+\setextosiguais{\USPpublicacaotipo}{dissertacao}{Disserta\c{c}\~ao apresentada \`a \USPunidadedata{} da \USPinstituicaodata{} para obten\c{c}\~ao do t\'itulo de Mestre em Ci\^encias}{}%
 }
 
 \newcommand{\USPcomentariodataSF}{%
