@@ -262,7 +262,7 @@
 		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
 		\hspace{.45\textwidth}%
 		\begin{minipage}{.5\textwidth}%
-			\vspace{2.5cm}%
+			\vspace{2cm}%
 			\estiloNaturezaarea{\USPcomentariodata\par}%
 		\end{minipage}\par%
 		\vfill%
@@ -288,11 +288,11 @@
 		\parbox[c][\USPalturacaixatitulocidadeano]{\textwidth}{\estiloTitulo{\USPtitulodata}\par%
 		\hspace{.45\textwidth}%
 		\begin{minipage}{.5\textwidth}%
-			\vspace{2.5cm}%
+			\vspace{2cm}%
 			\estiloNaturezaarea{\USPcomentariodata\par%
-			  \vspace{1cm}\USPtituloareadeconcentracao\par\USPareadeconcentracaodata\par%
-			  \vspace{1cm}\USPtituloorientador\par\USPorientadordata\par%
-			  \sevazio{\USPcoorientadordata}{}{\vspace{1cm}\USPtitulocoorientador\par\USPcoorientadordata\par}}%
+			  \vspace{.75cm}\USPtituloareadeconcentracao\par\USPareadeconcentracaodata\par%
+			  \vspace{.75cm}\USPtituloorientador\par\USPorientadordata\par%
+			  \sevazio{\USPcoorientadordata}{}{\vspace{.75cm}\USPtitulocoorientador\par\USPcoorientadordata\par}}%
 		\end{minipage}\par%
 		\vfill%
 		\estiloLocaldata{\sevazio{\USPvolumedata}{}{v. \USPvolumedata \vspace{.8cm}}\par%
