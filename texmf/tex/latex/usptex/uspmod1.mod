@@ -69,8 +69,9 @@
 \newcommand{\estiloLocaldataSF}[1]{\formatoCentralizado{\formatoNegrito{#1}}}
 \newcommand{\estilounidadecapa}[1]{\formatoCentralizado{\formatoNegrito{\formatoCaixaalta{#1}}}}
 \newcommand{\estiloNaturezaarea}[1]{{\formatoSimples\normalsize #1}}
-\newcommand{\estiloFichacatalograficaTitulo}[1]{\formatoCentralizado{\formatoNegrito{#1}}}
-\newcommand{\estiloFichacatalograficaConteudo}[1]{{\begin{flushleft}\formatoSimples\normalsize #1\end{flushleft}}}
+\newcommand{\estiloFichacatalograficaCabecalho}[1]{\formatoCentralizado{\formatoDez{#1}}}
+\newcommand{\estiloFichacatalograficaTitulo}[1]{\formatoCentralizado{\formatoNegrito{\formatoDez{#1}}}}
+\newcommand{\estiloFichacatalograficaConteudo}[1]{{\begin{flushleft}\formatoSimples\formatoDez{#1}\end{flushleft}}}
 \newcommand{\estiloDedicatoriaTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{\formatoQuatorze{#1}}}}
 \newcommand{\estiloDedicatoriaTexto}[1]{\formatoDireita{#1}}
 \newcommand{\estiloAgradecimentosTitulo}[1]{\formatoCentralizado{\formatoCaixaalta{\formatoNegrito{\formatoQuatorze{#1}}}}}
@@ -150,6 +151,19 @@
 
 \newcounter{pagina}
 \newenvironment{paginaPTnaonumerada}{\pagestyle{cabecalho}\setcounter{pagina}{\thepage}}{\clearpage\setcounter{page}{\the\value{pagina}}\pagestyle{plain}}
+
+\newenvironment{margensFichaCatalografica}{%
+	\begin{list}{}{%
+		% \setlength{\topsep}{0pt}%
+		\setlength{\leftmargin}{0cm}%
+		\setlength{\rightmargin}{1cm}%
+		% \setlength{\topmargin}{1cm}%
+		% \setlength{\textheight}{20cm}
+		% \setlength{\listparindent}{\parindent}%
+		% \setlength{\itemindent}{\parindent}%
+		% \setlength{\parsep}{\parskip}%
+	}%
+\item[]}{\end{list}}
 
 \pagestyle{plain}
 

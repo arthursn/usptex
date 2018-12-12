@@ -21,9 +21,15 @@
 \newcommand{\thepage}{\the\value{page}}
 \RequirePackage{hyperref}
 \newcommand{\USPpublicacaotipo}{}
+
 \DeclareOption{tese}{\renewcommand{\USPpublicacaotipo}{tese}}
 \DeclareOption{dissertacao}{\renewcommand{\USPpublicacaotipo}{dissertacao}}
+
+\DeclareOption{graduacao}{\renewcommand{\USPpublicacaotipo}{graduacao}}
+\DeclareOption{tcc}{\renewcommand{\USPpublicacaotipo}{graduacao}}
+\DeclareOption{tg}{\renewcommand{\USPpublicacaotipo}{graduacao}}
 \DeclareOption{tf}{\renewcommand{\USPpublicacaotipo}{graduacao}}
+
 \DeclareOption{epusp}{\def\USPunidadeformato{ep}\input{uspmod1.mod}}
 \DeclareOption{fdusp}{\def\USPunidadeformato{fd}\input{uspmod1.mod}}
 %\DeclareOption{qualificacao} {\renewcommand{\USPpublicacaotipo}{qualificacao}}

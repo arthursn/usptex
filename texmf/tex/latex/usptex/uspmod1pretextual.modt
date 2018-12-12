@@ -121,6 +121,7 @@
 \newcommand{\USPepigrafetexto}{}
 \newcommand{\epigrafe}[2]{{\let\\\par}\renewcommand{\USPepigrafetexto}{#1}\renewcommand{\USPepigrafeautor}{#2}\epigrafetrue}
 
+\newcommand{\USPcabecalhofichacatalografica}{Autorizo a reprodu\c{c}\~ao e divulga\c{c}\~ao total ou parcial deste trabalho, por qualquer meio convencional ou eletr\^onico, para fins de estudo e pesquisa, desde que citada a fonte.}
 \newcommand{\USPtitulosumariodata}{Sum\'ario}
 \newcommand{\USPtitulolistadesiglasdata}{Lista de abreviaturas e siglas}
 \newcommand{\USPtitulolistadesimbolosdata}{Lista de s\'imbolos}
@@ -341,23 +342,43 @@
 }
 
 \def\fichacatalografica{%
-	\begin{paginaPTnumerada}%
-	\null\vfill\par%
-	\ifUSPedicaorevisada{\begin{center}\fbox{\hspace{1.2cm}\parbox{11cm}{%
-			\vspace{.3cm}\USPformularioFCedicaorevisada\par%
-			\vspace{.5cm}%
-			}\hspace{.5cm}}%
-			\end{center}\par\vspace{2cm}}\fi
-	\begin{center}%
-		\estiloFichacatalograficaTitulo{\USPtitulofichacatalografica}\par%
-		\vspace{1.5cm}%
-		\fbox{\hspace{1.2cm}\parbox{11cm}{%
-			\vspace{.3cm}
-			\USPfichaPadrao\par%
-			\vspace{.5cm}%
-		}\hspace{.5cm}}%
-		\end{center}%
-	\end{paginaPTnumerada}%
+	\begin{paginaPTnaonumerada}%
+		\begin{margensFichaCatalografica}%
+			\begin{center}%
+				\parbox{14cm}{%
+					\estiloFichacatalograficaCabecalho{\USPcabecalhofichacatalografica}%
+				}%
+			\end{center}%
+			\ifUSPedicaorevisada{%
+				\vspace{3cm}%
+				\begin{center}%
+					\fbox{%
+						\hspace{1.2cm}%
+						\parbox{11cm}{%
+							\vspace{.3cm}\USPformularioFCedicaorevisada\par%
+							\vspace{.5cm}%
+						}%
+						\hspace{.5cm}%
+					}%
+				\end{center}%
+				\par\vspace{2cm}%
+			}\fi%
+			\vfill%
+			\begin{center}%
+				\estiloFichacatalograficaTitulo{\USPtitulofichacatalografica}\par%
+				\vspace{1cm}%
+				\fbox{%
+					\hspace{1.2cm}%
+					\parbox{11cm}{%
+						\vspace{.3cm}%
+						\USPfichaPadrao\par%
+						\vspace{.5cm}%
+					}%
+					\hspace{.5cm}%
+				}%
+			\end{center}%
+		\end{margensFichaCatalografica}%
+	\end{paginaPTnaonumerada}%
 }
 
 \def\paginadedicatoria{%
