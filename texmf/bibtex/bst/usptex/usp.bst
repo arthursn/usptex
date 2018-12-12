@@ -16,29 +16,31 @@
 % This work consists of the files usp.cls, uspmod1.mod, uspmod1bibliografia.modb, uspmod1ferramentas.modf, uspmod1flutuantes.modl, uspmod1pretextual.modt, uspdbdepartamentos.data, uspdbprogramas.data, usp.bst, usp-num.bst, usptex.inc, usptex.layout, usptexM.layout
 %%
 ENTRY
-  { %standard bibtex entries 
+{ %standard bibtex entries 
     address
     author
     booktitle 
-    chapter	
-	day
+    chapter 
+    day
     edition
     editor 
     journal
-	journal-sub
+    journal-sub
     month 
     note
     number
     organization
     pages
-	numpages
+    numpages
     publisher 
     school
     series 
     title
     type
+    url
+    urldate
     volume 
-	volumes
+    volumes
     year
     booksubtitle
     conference-number 
@@ -47,28 +49,28 @@ ENTRY
     dimensions 
     subtitle 
     year-presented
-	compilador
-	entidade
-	entidade-sub
-	doi
-	evento
-	periodo
-	local-publicacao
-	jurisdiction
-	tradutor
-	ilustrador
-	revisor
-	genero
-	depoimento
-	forma
-	direcao
-	inauthor
-	ineditor
-	inorganization
-	incompilador
-	inentidade
-	inentidade-sub
-    }{}{ label extra.label year.label usp.label}
+    compilador
+    entidade
+    entidade-sub
+    doi
+    evento
+    periodo
+    local-publicacao
+    jurisdiction
+    tradutor
+    ilustrador
+    revisor
+    genero
+    depoimento
+    forma
+    direcao
+    inauthor
+    ineditor
+    inorganization
+    incompilador
+    inentidade
+    inentidade-sub
+}{}{ label extra.label year.label usp.label}
 
 %general purpose strings
 STRINGS { r s t caractere}
@@ -352,7 +354,7 @@ s nameptr get.person 'r :=
 r get.last.name
    get.last.name
    r #1 "{ jj}" format.name$ * "u" change.case$
-	  r #1 "{, f.}{ vv}" format.name$ *
+      r #1 "{, f.}{ vv}" format.name$ *
 }
 FUNCTION {format.names}
 { 'bibinfo :=  duplicate$ empty$ 'skip$
@@ -401,20 +403,20 @@ FUNCTION {format.names.plain}
     { namesleft #0 > }
     { s nameptr "{ff }{vv }{ll}{ jj}" format.name$ 't :=
       nameptr #1 >
-	{ namesleft #1 >
-	    { ", " * t * }
-	    { numnames #20 >
-		{ "," * }
-		'skip$
-	      if$
-	      t "others" =
-		{ bbl.etal * }
-		{ bbl.and * t * }
-	      if$
-	    }
-	  if$
-	}
-	't
+    { namesleft #1 >
+        { ", " * t * }
+        { numnames #20 >
+        { "," * }
+        'skip$
+          if$
+          t "others" =
+        { bbl.etal * }
+        { bbl.and * t * }
+          if$
+        }
+      if$
+    }
+    't
       if$
       nameptr #1 + 'nameptr :=
       namesleft #1 - 'namesleft :=
@@ -477,6 +479,23 @@ FUNCTION {format.doi}
   if$
 }
 
+% ENTRADAS: url
+FUNCTION {format.url}
+{ url empty$
+    { "" }
+    {new.block "Dispon\'ivel em: \href{" url * "}{<" * url * ">}" *}
+  if$
+}
+
+% ENTRADAS: urldate
+FUNCTION {format.urldate}
+{
+  urldate empty$
+    { "" }
+    {new.block "Acesso em: " urldate *}
+  if$
+}
+
 % ENTRADAS: note
 FUNCTION {format.note}
 { note empty$
@@ -496,17 +515,17 @@ FUNCTION {format.note}
 
 FUNCTION {se.letra}
 { chr.to.int$ 'letra :=
-	letra #96 > letra #123 < and letra #64 > letra #91 < and or
+    letra #96 > letra #123 < and letra #64 > letra #91 < and or
 }
 
 FUNCTION {se.numero}
 { chr.to.int$ 'letra :=
-	letra #47 > letra #58 < and
+    letra #47 > letra #58 < and
 }
 
 FUNCTION {fim.de.comando}
 { 'caractere :=
-	caractere se.letra caractere se.numero or caractere "+" = or caractere "-" = or caractere "_" = or caractere "\" = or not
+    caractere se.letra caractere se.numero or caractere "+" = or caractere "-" = or caractere "_" = or caractere "\" = or not
 }
 
 FUNCTION {formatar.titulo.como.autor}
@@ -528,7 +547,7 @@ FUNCTION {formatar.titulo.como.autor}
     {s title.pos #1 substring$ 'title.char :=
       title.char "{" = {#0 'no.bracket :=} 'skip$ if$
       no.bracket 'skip$ {title.char "}" = {#1 'no.bracket :=} 'skip$ if$}  if$
-	  title.char " " = s t = or no.bracket and
+      title.char " " = s t = or no.bracket and
         {#0 'first.word :=
         t title.char * "u" change.case$
         title.pos #1 + 'title.pos :=
@@ -542,132 +561,132 @@ s *
 
 FUNCTION {para.maiuscula}
 { 's := %holds the title
-	#0 'protegido :=
-	#0 'brackets.abertos :=
-	#1 'title.pos :=
-	#1 'nao.comando :=
-	s text.length$ #1 + 'tamanho.string :=
-	"" 't :=
-	"" 'title.char :=
-	{title.pos tamanho.string = not}
-	{s title.pos #1 substring$ 'title.char :=
-		"{" title.char = "}" title.char = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$
-		protegido 
-		{"}" title.char =
-			{brackets.abertos #1 - 'brackets.abertos :=}
-			'skip$
-			if$
-			"{" title.char =
-			{brackets.abertos #1 + 'brackets.abertos :=}
-			'skip$
-			if$
-			brackets.abertos #0 =
-			{#0 'protegido :=}
-			'skip$
-			if$
-			protegido {t title.char * 't :=} 'skip$ if$} 
-		{title.char se.letra nao.comando and
-			{title.char "u" change.case$ 'title.char :=}
-			'skip$
-			if$
-			title.char "{" = nao.comando and
-			{#1 'protegido := #1 'brackets.abertos :=}
-			{title.char "\" = {#0 'nao.comando :=} 'skip$ if$
-				title.char fim.de.comando {#1 'nao.comando :=} 'skip$ if$}
-			if$
-			protegido 'skip$ {t title.char * 't :=} if$}
-		if$
-		title.pos #1 + 'title.pos :=}
-	while$
-	t
+    #0 'protegido :=
+    #0 'brackets.abertos :=
+    #1 'title.pos :=
+    #1 'nao.comando :=
+    s text.length$ #1 + 'tamanho.string :=
+    "" 't :=
+    "" 'title.char :=
+    {title.pos tamanho.string = not}
+    {s title.pos #1 substring$ 'title.char :=
+        "{" title.char = "}" title.char = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$
+        protegido 
+        {"}" title.char =
+            {brackets.abertos #1 - 'brackets.abertos :=}
+            'skip$
+            if$
+            "{" title.char =
+            {brackets.abertos #1 + 'brackets.abertos :=}
+            'skip$
+            if$
+            brackets.abertos #0 =
+            {#0 'protegido :=}
+            'skip$
+            if$
+            protegido {t title.char * 't :=} 'skip$ if$} 
+        {title.char se.letra nao.comando and
+            {title.char "u" change.case$ 'title.char :=}
+            'skip$
+            if$
+            title.char "{" = nao.comando and
+            {#1 'protegido := #1 'brackets.abertos :=}
+            {title.char "\" = {#0 'nao.comando :=} 'skip$ if$
+                title.char fim.de.comando {#1 'nao.comando :=} 'skip$ if$}
+            if$
+            protegido 'skip$ {t title.char * 't :=} if$}
+        if$
+        title.pos #1 + 'title.pos :=}
+    while$
+    t
 }
 
 FUNCTION {para.minuscula}
 { 's := %holds the title
-	#0 'protegido :=
-	#0 'brackets.abertos :=
-	#1 'title.pos :=
-	#1 'nao.comando :=
-	s text.length$ #1 + 'tamanho.string :=
-	"" 't :=
-	"" 'title.char :=
-	{title.pos tamanho.string = not}
-	{s title.pos #1 substring$ 'title.char :=
-		"{" title.char = "}" title.char = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$
-		protegido 
-		{"}" title.char =
-			{brackets.abertos #1 - 'brackets.abertos :=}
-			'skip$
-			if$
-			"{" title.char =
-			{brackets.abertos #1 + 'brackets.abertos :=}
-			'skip$
-			if$
-			brackets.abertos #0 =
-			{#0 'protegido :=}
-			'skip$
-			if$
-			protegido {t title.char * 't :=} 'skip$ if$} 
-		{title.char se.letra nao.comando and
-			{title.char "l" change.case$ 'title.char :=}
-			'skip$
-			if$
-			title.char "{" = nao.comando and
-			{#1 'protegido := #1 'brackets.abertos :=}
-			{title.char "\" = {#0 'nao.comando :=} 'skip$ if$
-				title.char fim.de.comando {#1 'nao.comando :=} 'skip$ if$}
-			if$
-			protegido 'skip$ {t title.char * 't :=} if$}
-		if$
-		title.pos #1 + 'title.pos :=}
-	while$
-	t
+    #0 'protegido :=
+    #0 'brackets.abertos :=
+    #1 'title.pos :=
+    #1 'nao.comando :=
+    s text.length$ #1 + 'tamanho.string :=
+    "" 't :=
+    "" 'title.char :=
+    {title.pos tamanho.string = not}
+    {s title.pos #1 substring$ 'title.char :=
+        "{" title.char = "}" title.char = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$
+        protegido 
+        {"}" title.char =
+            {brackets.abertos #1 - 'brackets.abertos :=}
+            'skip$
+            if$
+            "{" title.char =
+            {brackets.abertos #1 + 'brackets.abertos :=}
+            'skip$
+            if$
+            brackets.abertos #0 =
+            {#0 'protegido :=}
+            'skip$
+            if$
+            protegido {t title.char * 't :=} 'skip$ if$} 
+        {title.char se.letra nao.comando and
+            {title.char "l" change.case$ 'title.char :=}
+            'skip$
+            if$
+            title.char "{" = nao.comando and
+            {#1 'protegido := #1 'brackets.abertos :=}
+            {title.char "\" = {#0 'nao.comando :=} 'skip$ if$
+                title.char fim.de.comando {#1 'nao.comando :=} 'skip$ if$}
+            if$
+            protegido 'skip$ {t title.char * 't :=} if$}
+        if$
+        title.pos #1 + 'title.pos :=}
+    while$
+    t
 }
 
 FUNCTION {para.primeira.maiuscula}
 { 's := %holds the title
-	#0 'protegido :=
-	#0 'brackets.abertos :=
-	#1 'title.pos :=
-	#1 'nao.comando :=
-	#1 'primeira.letra :=
-	s text.length$ #1 + 'tamanho.string :=
-	"" 't :=
-	"" 'title.char :=
-	{title.pos tamanho.string = not}
-	{s title.pos #1 substring$ 'title.char :=
-		"{" title.char = "}" title.char = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$
-		protegido 
-		{ %{
-			"}" title.char =
-			{brackets.abertos #1 - 'brackets.abertos :=}
-			'skip$
-			if$
-			"{" title.char = %}
-			{brackets.abertos #1 + 'brackets.abertos :=}
-			'skip$
-			if$
-			brackets.abertos #0 =
-			{#0 'protegido :=}
-			'skip$
-			if$
-			title.char se.letra title.char se.numero or {#0 'primeira.letra :=} 'skip$ if$
-			protegido {t title.char * 't :=} 'skip$ if$} 
-		{title.char se.letra nao.comando and
-			{primeira.letra {title.char "u" change.case$ 'title.char :=} {title.char "l" change.case$ 'title.char :=} if$}
-			'skip$
-			if$
-			title.char "{" = nao.comando and %}
-			{#1 'protegido := #1 'brackets.abertos :=}
-			{title.char "\" = {#0 'nao.comando :=} 'skip$ if$
-				title.char fim.de.comando {#1 'nao.comando :=} 'skip$ if$}
-			if$
-			title.char se.letra title.char se.numero or nao.comando and {#0 'primeira.letra :=} 'skip$ if$
-			protegido 'skip$ {t title.char * 't :=} if$}
-		if$
-		title.pos #1 + 'title.pos :=}
-	while$
-	t
+    #0 'protegido :=
+    #0 'brackets.abertos :=
+    #1 'title.pos :=
+    #1 'nao.comando :=
+    #1 'primeira.letra :=
+    s text.length$ #1 + 'tamanho.string :=
+    "" 't :=
+    "" 'title.char :=
+    {title.pos tamanho.string = not}
+    {s title.pos #1 substring$ 'title.char :=
+        "{" title.char = "}" title.char = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$
+        protegido 
+        { %{
+            "}" title.char =
+            {brackets.abertos #1 - 'brackets.abertos :=}
+            'skip$
+            if$
+            "{" title.char = %}
+            {brackets.abertos #1 + 'brackets.abertos :=}
+            'skip$
+            if$
+            brackets.abertos #0 =
+            {#0 'protegido :=}
+            'skip$
+            if$
+            title.char se.letra title.char se.numero or {#0 'primeira.letra :=} 'skip$ if$
+            protegido {t title.char * 't :=} 'skip$ if$} 
+        {title.char se.letra nao.comando and
+            {primeira.letra {title.char "u" change.case$ 'title.char :=} {title.char "l" change.case$ 'title.char :=} if$}
+            'skip$
+            if$
+            title.char "{" = nao.comando and %}
+            {#1 'protegido := #1 'brackets.abertos :=}
+            {title.char "\" = {#0 'nao.comando :=} 'skip$ if$
+                title.char fim.de.comando {#1 'nao.comando :=} 'skip$ if$}
+            if$
+            title.char se.letra title.char se.numero or nao.comando and {#0 'primeira.letra :=} 'skip$ if$
+            protegido 'skip$ {t title.char * 't :=} if$}
+        if$
+        title.pos #1 + 'title.pos :=}
+    while$
+    t
 }
 
 FUNCTION {format.title.as.author}
@@ -684,8 +703,8 @@ FUNCTION {format.title.as.author}
       no.bracket 'skip$ {title.char "}" = {#1 'no.bracket :=} 'skip$ if$}  if$
       type$ "journalpart" =
         {title.char "." = title.char ":" = or title.char "!" = or
-	 title.char "," = or title.char ";" = or title.char "?" = or}
-	{title.char " " =}
+     title.char "," = or title.char ";" = or title.char "?" = or}
+    {title.char " " =}
       if$ s t = or no.bracket and
        {#0 'first.word :=
        t title.char * "u" change.case$
@@ -739,12 +758,12 @@ FUNCTION {word.in} { bbl.in " " * }
 FUNCTION {format.date}
 { year empty$
     { month empty$
-	{ bbl.missing.year }
-	{ "existe o campo month (mes) mas nao o campo year (ano) em " cite$ * warning$ month}
+    { bbl.missing.year }
+    { "existe o campo month (mes) mas nao o campo year (ano) em " cite$ * warning$ month}
       if$}
     { month empty$
-	{ year n.dashify}
-	{ month " " * year * }
+    { year n.dashify}
+    { month " " * year * }
       if$}
   if$
 }
@@ -753,31 +772,31 @@ FUNCTION {format.date}
 FUNCTION {format.full.date}
 { month empty$
     {#0}
-	{month #1 #1 substring$ chr.to.int$ duplicate$ #64 > swap$ #91 < and {#1} {#0} if$}
+    {month #1 #1 substring$ chr.to.int$ duplicate$ #64 > swap$ #91 < and {#1} {#0} if$}
   if$
   'month.first := %Se o mes iniciar com letra maiuscula significa que e idioma alemao ou ingles e o mes deve aparecer antes do dia
   day empty$
-		{month empty$
-			{year empty$
-				'skip$
-				{year output}
-			if$}
-			{month year empty$
-				'skip$
-				{" " * year *}
-			if$ output}
-		if$}
-		{month.first {""} {day} if$ month empty$
-			{year empty$
-				'skip$
-				{" " * year *}
-			if$}
-			{" " * month * month.first {" " * day *} {} if$ year empty$
-				'skip$
-				{" " * year *}
-			if$}
-		if$ output}
-	if$
+        {month empty$
+            {year empty$
+                'skip$
+                {year output}
+            if$}
+            {month year empty$
+                'skip$
+                {" " * year *}
+            if$ output}
+        if$}
+        {month.first {""} {day} if$ month empty$
+            {year empty$
+                'skip$
+                {" " * year *}
+            if$}
+            {" " * month * month.first {" " * day *} {} if$ year empty$
+                'skip$
+                {" " * year *}
+            if$}
+        if$ output}
+    if$
 }
 
 % ENTRADAS: title,subtitle
@@ -844,7 +863,7 @@ FUNCTION {format.number} %leaves formatted or empty number on the stack
 FUNCTION {format.patent.number}
 { number empty$
     'skip$
-	{number output}
+    {number output}
   if$
 }
 
@@ -1020,7 +1039,7 @@ FUNCTION {format.bchapter.pages}
   if$
   pages empty$
     'skip$
-	{"p. " pages * output.nonnull}
+    {"p. " pages * output.nonnull}
   if$
 }
 
@@ -1029,10 +1048,10 @@ FUNCTION {format.booktitle}
 {author empty$ editor empty$ and organization empty$ and jurisdiction empty$ and entidade empty$ and compilador empty$ and evento empty$ and
     {booktitle formatar.titulo.como.autor "booktitle" bibinfo.check duplicate$ empty$ 'skip$ {} if$
     booksubtitle  empty$ 'skip$ {booksubtitle ": " swap$ * para.primeira.maiuscula *
-	} if$}
+    } if$}
     {booktitle "booktitle" bibinfo.check emphasize duplicate$ empty$ 'skip$ {} if$
     booksubtitle  empty$ 'skip$ {booksubtitle ": " swap$ * para.primeira.maiuscula *
-	} if$}
+    } if$}
 if$
 }
 
@@ -1054,44 +1073,44 @@ FUNCTION {format.editors}
 
 % ENTRADAS: booktitle,booksubtitle,inauthor,ineditor,inorganization,incompilador,inentidade,inentidade-sub
 FUNCTION {format.in.ed.booktitle}
-{	word.in
-	inauthor empty$
-		{ ineditor empty$
-			{ inorganization empty$
-				{ incompilador empty$
-					{ inentidade empty$
-						{"inbook" type$ = {booktitle formatar.titulo.como.autor * booksubtitle empty$ 'skip$ {": " * booksubtitle *} if$}{booktitle empty$ 'skip$ {format.booktitle *} if$} if$}
-						{ inentidade para.maiuscula * inentidade-sub empty$ 'skip$ {": " * inentidade-sub *} if$}
-					if$}
-					{ incompilador "incompilador" format.names * " (Comp.)" *}
-				if$}
-				{ inorganization "inorganization" format.names * " (Org.)" *}
-			if$}
-			{ ineditor "ineditor" format.names * " (Ed.)" *}
-		if$}
-		{ inauthor "inauthor" format.names *}
-	if$
-	output new.block
-%	inauthor empty$ ineditor empty$ and inorganization empty$ and incompilador empty$ and inentidade empty$ and "inbook" type$ = booktitle empty$ or and
-%		'skip$
-%		{format.booktitle output new.block}
-%	if$
+{   word.in
+    inauthor empty$
+        { ineditor empty$
+            { inorganization empty$
+                { incompilador empty$
+                    { inentidade empty$
+                        {"inbook" type$ = {booktitle formatar.titulo.como.autor * booksubtitle empty$ 'skip$ {": " * booksubtitle *} if$}{booktitle empty$ 'skip$ {format.booktitle *} if$} if$}
+                        { inentidade para.maiuscula * inentidade-sub empty$ 'skip$ {": " * inentidade-sub *} if$}
+                    if$}
+                    { incompilador "incompilador" format.names * " (Comp.)" *}
+                if$}
+                { inorganization "inorganization" format.names * " (Org.)" *}
+            if$}
+            { ineditor "ineditor" format.names * " (Ed.)" *}
+        if$}
+        { inauthor "inauthor" format.names *}
+    if$
+    output new.block
+%   inauthor empty$ ineditor empty$ and inorganization empty$ and incompilador empty$ and inentidade empty$ and "inbook" type$ = booktitle empty$ or and
+%       'skip$
+%       {format.booktitle output new.block}
+%   if$
 }
 
 % ENTRADAS: booktitle,booksubtitle
 FUNCTION {format.in.booktitle}
 {
-	booktitle empty$ 'skip$
-		{word.in booktitle emphasize * booksubtitle empty$ 'skip$ {": " * booksubtitle *} if$}
-	if$
-	output
-	new.sentence
+    booktitle empty$ 'skip$
+        {word.in booktitle emphasize * booksubtitle empty$ 'skip$ {": " * booksubtitle *} if$}
+    if$
+    output
+    new.sentence
 }
 
 % ENTRADAS: evento,conference-number,conference-year,conference-location
 FUNCTION {format.in.conference}{
-	word.in evento empty$ 'skip$ {evento para.maiuscula *} if$ output
-	format.conference.info
+    word.in evento empty$ 'skip$ {evento para.maiuscula *} if$ output
+    format.conference.info
 }
 
 % ENTRADAS: type
@@ -1173,52 +1192,52 @@ FUNCTION {format.author.or.organization}
 
 % ENTRADAS: entidade,entidade-sub
 FUNCTION {formatar.entidade}{
-	entidade empty$ 
-		'skip$
-		{ entidade para.maiuscula entidade-sub empty$ 'skip$ {". " * entidade-sub *} if$ output.nonnull}
-	if$
+    entidade empty$ 
+        'skip$
+        { entidade para.maiuscula entidade-sub empty$ 'skip$ {". " * entidade-sub *} if$ output.nonnull}
+    if$
 }
 
 % ENTRADAS: author,editor,compilador,organization,entidade,entidade-sub
 FUNCTION {formatar.autor.ou.organizador.ou.editor.ou.compilador}
-	{  author empty$
-		{ editor empty$
-			{ compilador empty$
-				{ organization empty$
-					{ entidade empty$ 'skip$
-						{ entidade para.maiuscula entidade-sub empty$ 'skip$ {". " * entidade-sub *} if$ output.nonnull}
-					if$}
-					{ formatar.organization output.nonnull }
-				if$}
-				{ formatar.compilador output.nonnull }
-			if$}
-			{ formatar.editor output.nonnull }
-		if$}
-		{ format.authors output.nonnull }
-	if$
+    {  author empty$
+        { editor empty$
+            { compilador empty$
+                { organization empty$
+                    { entidade empty$ 'skip$
+                        { entidade para.maiuscula entidade-sub empty$ 'skip$ {". " * entidade-sub *} if$ output.nonnull}
+                    if$}
+                    { formatar.organization output.nonnull }
+                if$}
+                { formatar.compilador output.nonnull }
+            if$}
+            { formatar.editor output.nonnull }
+        if$}
+        { format.authors output.nonnull }
+    if$
 }
 
 % ENTRADAS: author,entidade,entidade-sub
 FUNCTION {formatar.entidade.e.ou.autor}
-{	entidade empty$
-		{author empty$
-			'skip$
-			{format.authors.plain para.maiuscula output}
-		if$}
-		{entidade para.maiuscula entidade-sub empty$ 'skip$ {". " * entidade-sub *} if$
-		author empty$
-			'skip$
-			{". " * format.authors.plain * output}
-		if$}
-	if$
+{   entidade empty$
+        {author empty$
+            'skip$
+            {format.authors.plain para.maiuscula output}
+        if$}
+        {entidade para.maiuscula entidade-sub empty$ 'skip$ {". " * entidade-sub *} if$
+        author empty$
+            'skip$
+            {". " * format.authors.plain * output}
+        if$}
+    if$
 }
 
 % ENTRADAS: jurisdiction
 FUNCTION {formatar.jurisdicao}
 {
-	jurisdiction empty$ 'skip$
-		{ jurisdiction para.maiuscula "jurisdiction"  bibinfo.check output }
-	if$
+    jurisdiction empty$ 'skip$
+        { jurisdiction para.maiuscula "jurisdiction"  bibinfo.check output }
+    if$
 }
 
 % ENTRADAS: editor,organization
@@ -1236,7 +1255,7 @@ FUNCTION {format.author.or.editor.or.organization}
 { author empty$
     { editor empty$
         { organization empty$
-	    'skip$
+        'skip$
             { organization para.maiuscula "organization"  bibinfo.check output}
           if$}
         { format.editors output.nonnull }
@@ -1254,7 +1273,7 @@ FUNCTION {format.journal}
 % ENTRADAS: depoimento
 FUNCTION {format.depoimento}
 {
-	depoimento empty$ 'skip$ {"[" depoimento * "]" * output.nonnull} if$
+    depoimento empty$ 'skip$ {"[" depoimento * "]" * output.nonnull} if$
 }
 
 FUNCTION {format.names.for.label1}
@@ -1268,15 +1287,15 @@ FUNCTION {format.names.for.label1}
       nameptr #1 >
         {namesleft #1 >
           { numnames usp.max.nomes > usp.max.nomes #0 = not and
-	    {#0 'namesleft := usp.max.nomes {bbl.etal *} 'skip$ if$}
-	    {", " * t * } if$ }
+        {#0 'namesleft := usp.max.nomes {bbl.etal *} 'skip$ if$}
+        {", " * t * } if$ }
             { t "others" =
               {usp.max.nomes {bbl.etal *} 'skip$ if$}
                 {numnames nameptr =
                 {bbl.and * t *}
-		'skip$ if$}
+        'skip$ if$}
              if$
-	     }
+         }
           if$ }
         't
       if$
@@ -1292,17 +1311,17 @@ FUNCTION {format.names.for.label2}
     { namesleft #0 > }
     {s nameptr "{ll}" format.name$ get.last.name
      s nameptr "{ jj}" format.name$ *
- 	 "u" change.case$ 't :=
+     "u" change.case$ 't :=
       nameptr #1 >
         {namesleft #1 >
             { numnames usp.max.nomes > 
-	      {#0 'namesleft := usp.max.nomes {bbl.etal *} 'skip$ if$} 
-	      {"; " * t * } if$ }
+          {#0 'namesleft := usp.max.nomes {bbl.etal *} 'skip$ if$} 
+          {"; " * t * } if$ }
             { t "OTHERS" = t "others" = or
-	      {usp.max.nomes {bbl.etal *} 'skip$ if$}
-	      {numnames nameptr = { bbl.semicolon * t *} 'skip$ if$}
+          {usp.max.nomes {bbl.etal *} 'skip$ if$}
+          {numnames nameptr = { bbl.semicolon * t *} 'skip$ if$}
              if$
-	     }
+         }
           if$ }
         't
       if$
@@ -1328,7 +1347,7 @@ FUNCTION {format.title.for.label}
   {first.word}
     {s title.pos #1 substring$ 'title.char :=
         title.char "." = title.char ":" = or title.char ";" = or
-	title.char "," = or title.char " " = or s t = or
+    title.char "," = or title.char " " = or s t = or
        {#0 'first.word :=
        title.pos #1 + 'title.pos :=}
        {title.pos #1 + 'title.pos := t title.char * 't :=}
@@ -1358,7 +1377,7 @@ FUNCTION {simple.format.title.for.label}
   {first.word}
     {s title.pos #1 substring$ 'title.char :=
         title.char "." = title.char ":" = or title.char ";" = or
-	title.char "," = or title.char " " = or s t = or
+    title.char "," = or title.char " " = or s t = or
        {#0 'first.word :=
        title.pos #1 + 'title.pos :=}
        {title.pos #1 + 'title.pos := t title.char * 't :=}
@@ -1385,7 +1404,7 @@ FUNCTION {extract.cvs.key} %we borrow the functionality of format.title.for.labe
       { title.char "$" =
         {#2 'value.pos :=}
         {t title.char * 't :=}
-	if$}
+    if$}
      if$
      key.pos #1 + 'key.pos :=
      }
@@ -1394,254 +1413,254 @@ FUNCTION {extract.cvs.key} %we borrow the functionality of format.title.for.labe
 }
 
 FUNCTION {pega.autor.editor.comp.titulo}
-{	author empty$ not
-		{author format.names.for.label1 * "}{" * author format.names.for.label2 *}
-		{editor empty$ not
-			{editor format.names.for.label1 * "}{" *  editor format.names.for.label2 *}
-			{compilador empty$ not
-				{compilador format.names.for.label1 * "}{" * compilador format.names.for.label2 *}
-				{organization empty$ not
-					{organization format.names.for.label1 * "}{" * organization format.names.for.label2 *}
-					{title empty$ not
-						{title format.title.for.label *}
-						{"nada}{NADA" *}
-					if$}
-				if$}
-			if$}
-		if$}
-	if$
+{   author empty$ not
+        {author format.names.for.label1 * "}{" * author format.names.for.label2 *}
+        {editor empty$ not
+            {editor format.names.for.label1 * "}{" *  editor format.names.for.label2 *}
+            {compilador empty$ not
+                {compilador format.names.for.label1 * "}{" * compilador format.names.for.label2 *}
+                {organization empty$ not
+                    {organization format.names.for.label1 * "}{" * organization format.names.for.label2 *}
+                    {title empty$ not
+                        {title format.title.for.label *}
+                        {"nada}{NADA" *}
+                    if$}
+                if$}
+            if$}
+        if$}
+    if$
 }
 
 FUNCTION {periodical.label}
-{	journal empty$ not
-		{journal *}
-		{"nada" *}
-	if$
+{   journal empty$ not
+        {journal *}
+        {"nada" *}
+    if$
 }
 
 FUNCTION {simple.periodical.label}
-{	journal empty$ not
-		{journal para.maiuscula *}
-		{"NADA" *}
-	if$
+{   journal empty$ not
+        {journal para.maiuscula *}
+        {"NADA" *}
+    if$
 }
 
 FUNCTION {conference.label}
-{	evento empty$ not
-		{evento *}
-		{"nada" *}
-	if$
+{   evento empty$ not
+        {evento *}
+        {"nada" *}
+    if$
 }
 
 FUNCTION {simple.conference.label}
-{	evento empty$ not
-		{evento para.maiuscula *}
-		{"NADA" *}
-	if$
+{   evento empty$ not
+        {evento para.maiuscula *}
+        {"NADA" *}
+    if$
 }
 
 FUNCTION {patent.label}
 {
-	entidade empty$ not
-		{entidade *}
-		{editor empty$ not
-			{editor format.names.for.label1 *}
-			{organization empty$ not
-				{organization format.names.for.label1 *}
-				{author empty$ not
-					{author format.names.for.label1 *}
-					{title empty$ not
-						{title format.title.for.label *}
-						{"nada" *}
-					if$}
-				if$}				
-			if$}
-		if$}
-	if$
+    entidade empty$ not
+        {entidade *}
+        {editor empty$ not
+            {editor format.names.for.label1 *}
+            {organization empty$ not
+                {organization format.names.for.label1 *}
+                {author empty$ not
+                    {author format.names.for.label1 *}
+                    {title empty$ not
+                        {title format.title.for.label *}
+                        {"nada" *}
+                    if$}
+                if$}                
+            if$}
+        if$}
+    if$
 }
 
 FUNCTION {simple.patent.label}
 {
-	entidade empty$ not
-		{entidade para.maiuscula *}
-		{editor empty$ not
-			{editor format.names.for.label2 *}
-			{organization empty$ not
-				{organization format.names.for.label2 *}
-				{author empty$ not
-					{author format.names.for.label2 *}
-					{title empty$ not
-						{title simple.format.title.for.label *}
-						{"NADA" *}
-					if$}
-				if$}				
-			if$}
-		if$}
-	if$
+    entidade empty$ not
+        {entidade para.maiuscula *}
+        {editor empty$ not
+            {editor format.names.for.label2 *}
+            {organization empty$ not
+                {organization format.names.for.label2 *}
+                {author empty$ not
+                    {author format.names.for.label2 *}
+                    {title empty$ not
+                        {title simple.format.title.for.label *}
+                        {"NADA" *}
+                    if$}
+                if$}                
+            if$}
+        if$}
+    if$
 }
 
 FUNCTION {juridical.label}
-{	jurisdiction empty$ not
-		{jurisdiction *}
-		{title empty$ not
-			{title format.title.for.label *}
-			{"nada" *}
-		if$}
-	if$
+{   jurisdiction empty$ not
+        {jurisdiction *}
+        {title empty$ not
+            {title format.title.for.label *}
+            {"nada" *}
+        if$}
+    if$
 }
 
 FUNCTION {simple.juridical.label}
-{	jurisdiction empty$ not
-		{jurisdiction para.maiuscula *}
-		{title empty$ not
-			{title simple.format.title.for.label *}
-			{"NADA" *}
-		if$}
-	if$
+{   jurisdiction empty$ not
+        {jurisdiction para.maiuscula *}
+        {title empty$ not
+            {title simple.format.title.for.label *}
+            {"NADA" *}
+        if$}
+    if$
 }
 
 FUNCTION {formata.forma.sentenca}
-{	's :=
-	#0 'posicao.substituicao :=
-	#1 'title.pos :=
-	s text.length$ #1 + 'tamanho.string :=
-	{title.pos tamanho.string = not}
-		{s title.pos #1 substring$ 'title.char :=
-		title.char ";" = {title.pos 'posicao.substituicao :=} 'skip$ if$
-		title.char "{" = title.char "}" = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$ title.pos #1 + 'title.pos :=}
-	while$
-	posicao.substituicao #0 = {s} {s #1 posicao.substituicao #1 - substring$ " e " * s posicao.substituicao #1 + global.max$ substring$ *} if$
+{   's :=
+    #0 'posicao.substituicao :=
+    #1 'title.pos :=
+    s text.length$ #1 + 'tamanho.string :=
+    {title.pos tamanho.string = not}
+        {s title.pos #1 substring$ 'title.char :=
+        title.char ";" = {title.pos 'posicao.substituicao :=} 'skip$ if$
+        title.char "{" = title.char "}" = or {tamanho.string #1 + 'tamanho.string :=} 'skip$ if$ title.pos #1 + 'title.pos :=}
+    while$
+    posicao.substituicao #0 = {s} {s #1 posicao.substituicao #1 - substring$ " e " * s posicao.substituicao #1 + global.max$ substring$ *} if$
 }
 
 FUNCTION {other.label}
-{	forma empty$ not
-		{forma formata.forma.sentenca *}
-		{"nada" *}
-	if$
+{   forma empty$ not
+        {forma formata.forma.sentenca *}
+        {"nada" *}
+    if$
 }
 
 FUNCTION {simple.other.label}
-{	forma empty$ not
-		{forma para.maiuscula *}
-		{"NADA" *}
-	if$
+{   forma empty$ not
+        {forma para.maiuscula *}
+        {"NADA" *}
+    if$
 }
 
 FUNCTION {article.label}
-{	author empty$ not
-		{author format.names.for.label1 *}
-		{editor empty$ not
-			{editor format.names.for.label1 *}
-			{compilador empty$ not
-				{compilador format.names.for.label1 *}
-				{organization empty$ not
-					{organization format.names.for.label1 *}
-					{entidade empty$ not
-						{entidade *}
-						{title empty$ not
-							{title format.title.for.label *}
-							{"nada" *}
-						if$}
-					if$}
-				if$}
-			if$}
-		if$}
-	if$
+{   author empty$ not
+        {author format.names.for.label1 *}
+        {editor empty$ not
+            {editor format.names.for.label1 *}
+            {compilador empty$ not
+                {compilador format.names.for.label1 *}
+                {organization empty$ not
+                    {organization format.names.for.label1 *}
+                    {entidade empty$ not
+                        {entidade *}
+                        {title empty$ not
+                            {title format.title.for.label *}
+                            {"nada" *}
+                        if$}
+                    if$}
+                if$}
+            if$}
+        if$}
+    if$
 }
 
 FUNCTION {simple.article.label}
-{	author empty$ not
-		{author format.names.for.label2 *}
-		{editor empty$ not
-			{editor format.names.for.label2 *}
-			{compilador empty$ not
-				{compilador format.names.for.label2 *}
-				{organization empty$ not
-					{organization format.names.for.label2 *}
-					{entidade empty$ not
-						{entidade para.maiuscula *}
-						{title empty$ not
-							{title simple.format.title.for.label *}
-							{"NADA" *}
-						if$}
-					if$}
-				if$}
-			if$}
-		if$}
-	if$
+{   author empty$ not
+        {author format.names.for.label2 *}
+        {editor empty$ not
+            {editor format.names.for.label2 *}
+            {compilador empty$ not
+                {compilador format.names.for.label2 *}
+                {organization empty$ not
+                    {organization format.names.for.label2 *}
+                    {entidade empty$ not
+                        {entidade para.maiuscula *}
+                        {title empty$ not
+                            {title simple.format.title.for.label *}
+                            {"NADA" *}
+                        if$}
+                    if$}
+                if$}
+            if$}
+        if$}
+    if$
 }
 
 FUNCTION {calc.extended.label}
 { "["
-	#0 'escolhido :=
-	type$ "periodical" =
-		{ periodical.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "conference" =
-		{conference.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "patent" =
-		{patent.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "juridical" =
-		{juridical.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "juridicalp" =
-		{juridical.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "other" =
-		{other.label #1 'escolhido :=}
-		'skip$
-	if$
-	escolhido not
-		{article.label}
-		'skip$
-	if$
-	year empty$ {" (s.d.)" *} {" (" * year * ")" *} if$
-	'label :=
+    #0 'escolhido :=
+    type$ "periodical" =
+        { periodical.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "conference" =
+        {conference.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "patent" =
+        {patent.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "juridical" =
+        {juridical.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "juridicalp" =
+        {juridical.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "other" =
+        {other.label #1 'escolhido :=}
+        'skip$
+    if$
+    escolhido not
+        {article.label}
+        'skip$
+    if$
+    year empty$ {" (s.d.)" *} {" (" * year * ")" *} if$
+    'label :=
 }
 %generates and simple label of type "Author YEAR"
 %final result is placed onto the stack
 
 FUNCTION {calc.simple.label}
-{	"["
-	#0 'escolhido :=
-	type$ "periodical" =
-		{simple.periodical.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "conference" =
-		{simple.conference.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "patent" =
-		{simple.patent.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "juridical" =
-		{simple.juridical.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "juridicalp" =
-		{simple.juridical.label #1 'escolhido :=}
-		'skip$
-	if$
-	type$ "other" =
-		{simple.other.label #1 'escolhido :=}
-		'skip$
-	if$
-	escolhido not
-		{simple.article.label}
-		'skip$
-	if$
-	year empty$ {", s.d." *} {", " * year *} if$
-	"]" *
-	'usp.label :=
+{   "["
+    #0 'escolhido :=
+    type$ "periodical" =
+        {simple.periodical.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "conference" =
+        {simple.conference.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "patent" =
+        {simple.patent.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "juridical" =
+        {simple.juridical.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "juridicalp" =
+        {simple.juridical.label #1 'escolhido :=}
+        'skip$
+    if$
+    type$ "other" =
+        {simple.other.label #1 'escolhido :=}
+        'skip$
+    if$
+    escolhido not
+        {simple.article.label}
+        'skip$
+    if$
+    year empty$ {", s.d." *} {", " * year *} if$
+    "]" *
+    'usp.label :=
 }
 
 FUNCTION {output.bibitem}
@@ -1717,6 +1736,16 @@ FUNCTION {laudo}
   fin.entry
 }
 
+% ENTRADAS: author,title,url,urldate
+FUNCTION {online} 
+{ output.bibitem
+  formatar.autor.ou.organizador.ou.editor.ou.compilador new.sentence
+  format.title "title" output.check new.sentence
+  format.url output new.block
+  format.urldate output new.block
+  fin.entry
+}
+
 % ENTRADAS: genero,type
 FUNCTION {format.thesis.type}
 { genero empty$
@@ -1726,7 +1755,7 @@ FUNCTION {format.thesis.type}
          {bbl.mthesis}
          {type$ "monography" =
             {bbl.monography}
-	        {bbl.void}
+            {bbl.void}
          if$}
       if$}
     if$}
@@ -1796,33 +1825,33 @@ FUNCTION {incollection} {inbook}
 
 % ENTRADAS: evento,publisher,address,booktitle,booksubtitle,conference-number,conference-year,conference-location,numpages,year,month,pages,doi,note
 FUNCTION {conference}
-{	output.bibitem
-	evento empty$ 'skip$ {evento para.maiuscula output new.block} if$
-	format.conference.info
-	format.booktitle output new.block
-	format.publisher.address output
-	format.date output
-	format.pages output new.block
-	format.numpages output new.block
-	format.doi output new.block
-	format.note output new.block
-	fin.entry
+{   output.bibitem
+    evento empty$ 'skip$ {evento para.maiuscula output new.block} if$
+    format.conference.info
+    format.booktitle output new.block
+    format.publisher.address output
+    format.date output
+    format.pages output new.block
+    format.numpages output new.block
+    format.doi output new.block
+    format.note output new.block
+    fin.entry
 }
 
 % ENTRADAS: author,editor,compilador,organization,entidade,entidade-sub,publisher,address,evento,conference-number,conference-year,conference-location, booktitle,booksubtitle,year,month,title,subtitle,pages,number,volume,series,volumes,doi,note
 FUNCTION {inconference}
-{	output.bibitem
-	formatar.autor.ou.organizador.ou.editor.ou.compilador  new.sentence
-	format.title "title" output.check new.block
-	format.in.conference
-	format.booktitle output new.block
-	format.publisher.address output
-	format.date output
-	format.pages output new.block
-	format.volume.number.series output
-	format.doi output new.block
-	format.note output new.block
-	fin.entry
+{   output.bibitem
+    formatar.autor.ou.organizador.ou.editor.ou.compilador  new.sentence
+    format.title "title" output.check new.block
+    format.in.conference
+    format.booktitle output new.block
+    format.publisher.address output
+    format.date output
+    format.pages output new.block
+    format.volume.number.series output
+    format.doi output new.block
+    format.note output new.block
+    fin.entry
 }
 
 % ENTRADAS: editor,organization,publisher,address,conference-number,conference-year,conference-location,title,subtitle,year,month,pages,volume,number,series, volumes,doi,note
@@ -1855,31 +1884,31 @@ FUNCTION {proceedings}
 
 % ENTRADAS: evento,conference-number,conference-location,conference-year,author,editor,compilador,organization,entidade,entidade-sub,booktitle,booksubtitle, year,month,title,subtitle,pages,volume,number,series,doi,note
 FUNCTION {inproceedings}
-{	output.bibitem
-	formatar.autor.ou.organizador.ou.editor.ou.compilador  new.sentence
-	format.title "title" output.check new.block
-	format.booktitle output new.block
-	format.bvolume.if.no.series output
-	format.pages output
-	format.date output new.block
-	evento empty$ 'skip$ {"Apresentado a " conference-number empty$ 'skip$ {conference-number * ". " *} if$ evento * output conference-location empty$ 'skip$ {conference-location output} if$ conference-year empty$ 'skip$ {conference-year output} if$ new.sentence} if$
-	format.doi output new.block
-	format.note output new.block
-	fin.entry
+{   output.bibitem
+    formatar.autor.ou.organizador.ou.editor.ou.compilador  new.sentence
+    format.title "title" output.check new.block
+    format.booktitle output new.block
+    format.bvolume.if.no.series output
+    format.pages output
+    format.date output new.block
+    evento empty$ 'skip$ {"Apresentado a " conference-number empty$ 'skip$ {conference-number * ". " *} if$ evento * output conference-location empty$ 'skip$ {conference-location output} if$ conference-year empty$ 'skip$ {conference-year output} if$ new.sentence} if$
+    format.doi output new.block
+    format.note output new.block
+    fin.entry
 }
 
 % ENTRADAS: journal,periodo,publisher,address,year,month,dimensions,number,volume,series,doi,note
 FUNCTION {periodical}
-{ 	output.bibitem
-	journal para.maiuscula output new.block
-	format.publisher.address output
-	format.bvolume.number.series output
-	format.date output
-	periodo "periodo" bibinfo.check output new.block
-	format.dimensions  new.sentence
-	format.doi output new.block
-	format.note output new.block
-	fin.entry
+{   output.bibitem
+    journal para.maiuscula output new.block
+    format.publisher.address output
+    format.bvolume.number.series output
+    format.date output
+    periodo "periodo" bibinfo.check output new.block
+    format.dimensions  new.sentence
+    format.doi output new.block
+    format.note output new.block
+    fin.entry
 }
 
 % ENTRADAS: address,publisher,depoimento,journal,journal-sub,author,editor,compilador,organization,entidade,entidade-sub,numpages,year,month,title,subtitle, pages,volume,number,doi,note
@@ -2029,17 +2058,17 @@ FUNCTION {patent.sort}
 
 FUNCTION {any.sort}
 { #0 'escolhido :=
-	type$ "patent" = {patent.sort} 'skip$ if$
-	jurisdiction empty$ escolhido or 'skip$ {#1 'escolhido := jurisdiction sortify} if$
-	author empty$ escolhido or 'skip$ {#1 'escolhido := author sort.format.names} if$
-	editor empty$ escolhido or 'skip$ {#1 'escolhido := editor sort.format.names} if$
-	compilador empty$ escolhido or 'skip$ {#1 'escolhido := compilador sort.format.names} if$
-	organization empty$ escolhido or 'skip$ {#1 'escolhido := organization sort.format.names} if$
-	entidade empty$ escolhido or 'skip$ {#1 'escolhido := entidade sortify} if$
-	title empty$ escolhido or 'skip$ {#1 'escolhido := title sortify} if$
-	journal empty$ escolhido or 'skip$ {#1 'escolhido := journal sortify} if$
-	evento empty$ escolhido or 'skip$ {#1 'escolhido := evento sortify} if$
-	escolhido 'skip$ {note empty$ { "precisa de campos in " cite$ * warning$ ""} {note sortify} if$} if$
+    type$ "patent" = {patent.sort} 'skip$ if$
+    jurisdiction empty$ escolhido or 'skip$ {#1 'escolhido := jurisdiction sortify} if$
+    author empty$ escolhido or 'skip$ {#1 'escolhido := author sort.format.names} if$
+    editor empty$ escolhido or 'skip$ {#1 'escolhido := editor sort.format.names} if$
+    compilador empty$ escolhido or 'skip$ {#1 'escolhido := compilador sort.format.names} if$
+    organization empty$ escolhido or 'skip$ {#1 'escolhido := organization sort.format.names} if$
+    entidade empty$ escolhido or 'skip$ {#1 'escolhido := entidade sortify} if$
+    title empty$ escolhido or 'skip$ {#1 'escolhido := title sortify} if$
+    journal empty$ escolhido or 'skip$ {#1 'escolhido := journal sortify} if$
+    evento empty$ escolhido or 'skip$ {#1 'escolhido := evento sortify} if$
+    escolhido 'skip$ {note empty$ { "precisa de campos in " cite$ * warning$ ""} {note sortify} if$} if$
 }
 
 FUNCTION {presort}
