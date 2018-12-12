@@ -350,11 +350,11 @@ FUNCTION {recompose.name}
 
 FUNCTION {format.single.name}
 {
-s nameptr get.person 'r :=
-r get.last.name
-   get.last.name
-   r #1 "{ jj}" format.name$ * "u" change.case$
-      r #1 "{, f.}{ vv}" format.name$ *
+    s nameptr get.person 'r :=
+    r get.last.name
+    get.last.name
+    r #1 "{ jj}" format.name$ * "u" change.case$
+    r #1 "{, f.}{ vv}" format.name$ *
 }
 FUNCTION {format.names}
 { 'bibinfo :=  duplicate$ empty$ 'skip$
@@ -363,7 +363,9 @@ FUNCTION {format.names}
    #1 'nameptr :=  s num.names$ 'numnames :=
     numnames 'namesleft :=
     { namesleft #0 > }
-    { format.single.name
+    { 
+      %Solucao meia boca para o problema de capitalizacao de nomes entre chaves
+      "\uppercase{" format.single.name * "}" * 
       bibinfo bibinfo.check
       't :=
       nameptr #1 >
