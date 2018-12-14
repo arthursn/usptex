@@ -347,13 +347,19 @@ FUNCTION {recompose.name}
    swap$ get.von #1 "{ ff}" format.name$ *
    }
 
+%Brute force solution for the problem o capitalization of names containing curly brackets
+STRINGS {string}
+FUNCTION {capitalize.bruteforce} {
+  'string :=
+  "\uppercase{" string * "}" *
+}
 
 FUNCTION {format.single.name}
 {
     s nameptr get.person 'r :=
     r get.last.name
-    get.last.name
-    r #1 "{ jj}" format.name$ * "u" change.case$
+    %get.last.name
+    r #1 "{ jj}" format.name$ * capitalize.bruteforce
     r #1 "{, f.}{ vv}" format.name$ *
 }
 FUNCTION {format.names}
@@ -364,8 +370,7 @@ FUNCTION {format.names}
     numnames 'namesleft :=
     { namesleft #0 > }
     { 
-      %Solucao para o problema de capitalizacao de nomes entre chaves
-      "\uppercase{" format.single.name * "}" * 
+      format.single.name
       bibinfo bibinfo.check
       't :=
       nameptr #1 >
@@ -1313,7 +1318,7 @@ FUNCTION {format.names.for.label2}
     { namesleft #0 > }
     {s nameptr "{ll}" format.name$ get.last.name
      s nameptr "{ jj}" format.name$ *
-     "u" change.case$ 't :=
+     capitalize.bruteforce 't :=
       nameptr #1 >
         {namesleft #1 >
             { numnames usp.max.nomes > 
