@@ -107,6 +107,7 @@
 
 \newif\ifUSPedicaorevisada\USPedicaorevisadafalse
 \newcommand{\edicaorevisada}{\USPedicaorevisadatrue}
+\newcommand{\edicaocorrigida}{\USPedicaorevisadatrue}
 
 \input{uspdbprogramas.data}
 \input{uspdbdepartamentos.data}
@@ -323,10 +324,15 @@
 }
 
 \def\USPformularioFCedicaorevisada{%
-	Este exemplar foi revisado e alterado em rela\c{c}\~ao \`a vers\~ao original, sob responsabilidade \'unica do autor e com a anu\^encia de seu orientador.\par\vspace{.3cm}%
-	\USPcidadedata, \ldots\ldots de \ldots\ldots\ldots\ldots\ldots\ldots de \USPanodata\par\vspace{.3cm}%
-	Assinatura do autor\par\vspace{.3cm}%
-	Assinatura do orientador%
+	\estiloFichacatalograficaConteudo{%
+		Este exemplar foi revisado e corrigido em rela\c{c}\~ao \`a vers\~ao original, sob responsabilidade \'unica do autor e com a anu\^encia de seu orientador.\par%
+		\vspace{.5cm}%
+		\USPcidadedata,\ \ \ldots\ldots\ \ de\ \ \ldots\ldots\ldots\ldots\ldots\ldots\ldots\ \ de\ \ \USPanodata\par%
+		\vspace{.5cm}%
+		Assinatura do autor: \hfill\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\par%
+		\vspace{.5cm}%
+		Assinatura do orientador: \hfill\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots\ldots%
+	}%
 }
 
 \def\ultimaPagina{}
@@ -350,7 +356,7 @@
 				}%
 			\end{center}%
 			\ifUSPedicaorevisada{%
-				\vspace{3cm}%
+				\vspace{2cm}%
 				\begin{center}%
 					\fbox{%
 						\hspace{1.2cm}%
@@ -366,7 +372,7 @@
 			\vfill%
 			\begin{center}%
 				\estiloFichacatalograficaTitulo{\USPtitulofichacatalografica}\par%
-				\vspace{1cm}%
+				\vspace{.5cm}%
 				\fbox{%
 					\hspace{1.2cm}%
 					\parbox{11cm}{%

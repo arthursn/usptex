@@ -364,7 +364,7 @@ FUNCTION {format.names}
     numnames 'namesleft :=
     { namesleft #0 > }
     { 
-      %Solucao meia boca para o problema de capitalizacao de nomes entre chaves
+      %Solucao para o problema de capitalizacao de nomes entre chaves
       "\uppercase{" format.single.name * "}" * 
       bibinfo bibinfo.check
       't :=
