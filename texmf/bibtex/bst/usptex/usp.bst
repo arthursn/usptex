@@ -1926,7 +1926,7 @@ FUNCTION {article}
   format.depoimento new.block
   format.journal output
   address "address" bibinfo.check output
-  publisher "publisher" bibinfo.check output
+  %publisher "publisher" bibinfo.check output
   format.volume output
   format.number output
   format.pages output
