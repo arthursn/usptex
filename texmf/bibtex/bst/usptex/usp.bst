@@ -964,7 +964,7 @@ FUNCTION {format.edition}
 { edition duplicate$ empty$ 'skip$
     {output.state mid.sentence = { "l" } { "t" } if$ change.case$
       "edition" bibinfo.check
-    edition #1 #1 substring$ is.num {". " * bbl.edition * } 'skip$ if$}
+    edition #1 #1 substring$ is.num {" " * bbl.edition * } 'skip$ if$}
   if$
 }
 INTEGERS { multiresult }
