@@ -302,7 +302,8 @@
 \newenvironment{entradasSiglas}{\global\gravaSiglafalse}{}
 
 \newcommand*\l@siglaext[3]{%
-	\global\adicionaElemento{USPSiglasMenor}{#1}\global\adicionaElemento{USPSiglasMaior}{#2}\global\adicionaElemento{USPSiglasPropriedade}{#3}%
+	\USPadicionaSigla{#1}{#2}{#3}%
+	% \global\adicionaElemento{USPSiglasMenor}{#1}\global\adicionaElemento{USPSiglasMaior}{#2}\global\adicionaElemento{USPSiglasPropriedade}{#3}%
 }
 
 %%%%%% Símbolos
@@ -312,8 +313,11 @@
 	\write\tf@ldsb{\protect\USPcontentsline{simbolo}{#1}{#2}}%
 }
 
+\newlength\espacoSimboloEntre
+\setlength\espacoSimboloEntre{.3cm}
+
 \newcommand*\l@simbolo[2]{%
-	\noindent\begin{minipage}{.15\textwidth}#1\end{minipage}\begin{minipage}{.75\textwidth}#2\end{minipage}\par%
+	\noindent\begin{minipage}{.15\textwidth}#1\end{minipage}\begin{minipage}{.75\textwidth}#2\end{minipage}\par\vspace{\espacoSimboloEntre}%
 }
 
 %%% Citações
