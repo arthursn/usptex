@@ -483,7 +483,7 @@
 \newlength\espacoSiglaNome
 \setlength\espacoSiglaNome{.2cm}
 \newlength\espacoSiglaEntre
-\setlength\espacoSiglaEntre{.3cm}
+\setlength\espacoSiglaEntre{.4cm}
 
 \newcommand\listadesiglas{%
     \begin{paginaPTnumerada}
@@ -495,7 +495,7 @@
 		\loop\ifnum\value{auxbuscaalfabetica}<\value{contUSPSiglasMenor}%
 			\edef\@tempb{\pegaElementoIndice{USPSiglasPropriedade}{\the\value{auxbuscaalfabetica}}}%
 			\noindent\hspace{\espacoSiglaMargem}\begin{minipage}{.15\textwidth}\pegaElementoIndice{USPSiglasMenor}{\the\value{auxbuscaalfabetica}}\end{minipage}%
-			\noindent\hspace{\espacoSiglaNome}\begin{minipage}{.75\textwidth}\ifx\@tempa\@tempb\emph{\pegaElementoIndice{USPSiglasMaior}{\the\value{auxbuscaalfabetica}}}\else\pegaElementoIndice{USPSiglasMaior}{\the\value{auxbuscaalfabetica}}\fi\end{minipage}\par%
+			\noindent\hspace{\espacoSiglaNome}\begin{minipage}{.85\textwidth}\ifx\@tempa\@tempb\emph{\pegaElementoIndice{USPSiglasMaior}{\the\value{auxbuscaalfabetica}}}\else\pegaElementoIndice{USPSiglasMaior}{\the\value{auxbuscaalfabetica}}\fi\end{minipage}\par%
 			\vspace{\espacoSiglaEntre}%
 			\stepcounter{auxbuscaalfabetica}%
 		\repeat%

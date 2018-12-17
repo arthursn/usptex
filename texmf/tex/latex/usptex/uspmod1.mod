@@ -314,10 +314,10 @@
 }
 
 \newlength\espacoSimboloEntre
-\setlength\espacoSimboloEntre{.3cm}
+\setlength\espacoSimboloEntre{.4cm}
 
 \newcommand*\l@simbolo[2]{%
-	\noindent\begin{minipage}{.15\textwidth}#1\end{minipage}\begin{minipage}{.75\textwidth}#2\end{minipage}\par\vspace{\espacoSimboloEntre}%
+	\noindent\begin{minipage}{.15\textwidth}#1\end{minipage}\begin{minipage}{.85\textwidth}#2\end{minipage}\par\vspace{\espacoSimboloEntre}%
 }
 
 %%% Citações
